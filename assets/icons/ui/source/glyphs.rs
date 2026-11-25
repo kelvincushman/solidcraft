@@ -119,14 +119,21 @@ pub(crate) fn brand_mark_silhouette(p: &egui::Painter, c: Pos2, height: f32, ink
 }
 
 fn brand_mark_styled(p: &egui::Painter, c: Pos2, height: f32, colours: [Color32; 3], _edges: bool) {
-    // GE STARR Design's mark: a rounded steel badge with "GS" in navy. The GE STARR mark is two G-shaped curves;
-    // egui fills only convex shapes, so the letters stand in for it here.
+    // GE STARR Design: the GE STARR mark (four G shapes) in navy on a rounded steel badge, so it reads on the navy
+    // app bar and on light dialogs alike. The mark is not convex, so it is drawn as triangles (gestarr_mark.rs).
     let [light, _, dark] = colours;
     let side = height * 1.05;
-    let rect = egui::Rect::from_center_size(c, egui::vec2(side, side));
-    p.rect_filled(rect, side * 0.22, light);
-    p.text(c, egui::Align2::CENTER_CENTER, "GS", egui::FontId::proportional(side * 0.52), dark);
+    p.rect_filled(Rect::from_center_size(c, vec2(side, side)), side * 0.22, light);
+    let size = side * 0.74;
+    let mut mesh = egui::Mesh::default();
+    for [x, y] in MARK_VERTS {
+        mesh.colored_vertex(pos2(c.x + x * size, c.y + y * size), dark);
+    }
+    mesh.indices = MARK_TRIS.iter().map(|&i| u32::from(i)).collect();
+    p.add(egui::Shape::mesh(mesh));
 }
+
+include!("gestarr_mark.rs");
 
 pub(crate) fn cross(p: &egui::Painter, r: Rect, s: Stroke) {
     p.line_segment([r.left_top(), r.right_bottom()], s);
