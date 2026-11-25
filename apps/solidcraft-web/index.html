@@ -32,7 +32,9 @@
   <script>
     // Offline use and updates (sw.js; written into release builds by `cargo xtask web-offline`).
     if ("serviceWorker" in navigator) {
-      addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+      // GE STARR Design: no offline service worker. TRACK serves the editor only to signed-in people, inside its
+      // Design pages; a cached worker would serve it without asking. Remove any worker an earlier build installed.
+      addEventListener("load", () => navigator.serviceWorker.getRegistrations().then((rs) => rs.forEach((r) => r.unregister())).catch(() => {}));
     }
     // Install as an app: the browser's offer can come before the app runs, so it is kept here for
     // the app's File ▸ Install app… item (src/install.rs). Installed, the browser makes no more offers.

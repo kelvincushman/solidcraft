@@ -40,5 +40,7 @@ FROM nginxinc/nginx-unprivileged:1.29-alpine
 COPY packaging/docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY LICENSE-MIT LICENSE-APACHE NOTICE THIRD-PARTY-LICENSES.txt /usr/share/doc/solidcraft/
 COPY --from=site / /srv/solidcraft/
+# GE STARR Design: no offline worker (see the file).
+COPY packaging/docker/sw-unregister.js /srv/solidcraft/sw.js
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s CMD wget -q --spider http://127.0.0.1:8080/ || exit 1
