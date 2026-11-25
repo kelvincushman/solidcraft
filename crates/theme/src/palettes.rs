@@ -296,7 +296,7 @@ impl Tokens {
             ],
             analysis: AnalysisColors::DEFAULT,
             icons: IconColors { highlight: Color32::WHITE, agent: Color32::from_rgb(168, 85, 247), marker_halo: Color32::from_black_alpha(150) },
-            logo: [Color32::from_rgb(96, 158, 236), Color32::from_rgb(58, 136, 238), Color32::from_rgb(55, 108, 197)],
+            logo: [Color32::from_rgb(194, 205, 214), Color32::from_rgb(74, 94, 114), Color32::from_rgb(46, 61, 79)],
         }
     }
     pub const fn dark() -> Tokens {

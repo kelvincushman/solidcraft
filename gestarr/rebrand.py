@@ -63,7 +63,10 @@ def main():
                  ("accent_soft: Color32::from_rgb(214, 230, 250)", "accent_soft: Color32::from_rgb(222, 229, 235)"),
                  ("t.app_bar = Color32::from_rgb(28, 31, 38)", "t.app_bar = Color32::from_rgb(30, 41, 54)"),
                  ("t.accent = Color32::from_rgb(58, 136, 238)", "t.accent = Color32::from_rgb(86, 116, 146)"),
-                 ("t.accent_soft = Color32::from_rgb(42, 70, 110)", "t.accent_soft = Color32::from_rgb(58, 74, 92)")]:
+                 ("t.accent_soft = Color32::from_rgb(42, 70, 110)", "t.accent_soft = Color32::from_rgb(58, 74, 92)"),
+                 # The app bar's GS badge: steel badge, navy letters.
+                 ("logo: [Color32::from_rgb(96, 158, 236), Color32::from_rgb(58, 136, 238), Color32::from_rgb(55, 108, 197)]",
+                  "logo: [Color32::from_rgb(194, 205, 214), Color32::from_rgb(74, 94, 114), Color32::from_rgb(46, 61, 79)]")]:
         s = s.replace(a, b)
     pal.write_text(s)
     # Help > About: say what this is built on (the licence texts below it come from the engine, unchanged).
@@ -74,6 +77,7 @@ def main():
     # Links: help and problem reports go to TRACK, never to SolidCraft's site or public issue tracker (a report
     # carries the customer's diagnostics). The update check is already off in the browser build.
     for rel, a, b in [("crates/ui-egui/src/help.rs", '"https://docs.solidcraft.io/"', '"https://app.gestarr.co.uk/design/help/"'),
+                      ("crates/ui-egui/src/update.rs", '"https://github.com/tangency-labs/solidcraft/releases"', '"https://app.gestarr.co.uk/design/help/"'),
                       ("crates/ui-egui/src/issue_report.rs", '"https://github.com/tangency-labs/solidcraft/issues/new"', '"https://app.gestarr.co.uk/design/report"')]:
         f = ROOT / rel
         f.write_text(f.read_text().replace(a, b))

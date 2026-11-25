@@ -78,7 +78,14 @@ impl Download {
         // The extension selects the design loader even when the URL has no extension. Named
         // after the link, as the progress card shows the file's name.
         let file: String = name.chars().map(|c| if matches!(c, '/' | '\\') { '_' } else { c }).collect();
-        let path = format!("/linked/{}.{}", if file.is_empty() { "design" } else { &file }, solidcraft_engine::io::DESIGN_EXT);
+        // GE STARR Design: a STEP link (an uploaded part TRACK hands over) opens as a new design from the file,
+        // through the same loader as File › Open; anything else is a design.
+        let step = file.rsplit_once('.').is_some_and(|(_, ext)| ext.eq_ignore_ascii_case("step") || ext.eq_ignore_ascii_case("stp"));
+        let path = if step {
+            format!("/linked/{file}")
+        } else {
+            format!("/linked/{}.{}", if file.is_empty() { "design" } else { &file }, solidcraft_engine::io::DESIGN_EXT)
+        };
         vfs::insert(&path, bytes);
         // Opened as any design is, with its progress and Cancel; finished in `opened`.
         self.opening = Some((app.open_path_answered(&path), name, path));
@@ -96,7 +103,12 @@ impl Download {
         let Some((_, name, path)) = self.opening.take() else { return };
         if ok && app.session.path.as_deref() == Some(path.as_str()) {
             app.session.path = None;
-            app.session.doc_mut().name = name;
+            // "bracket.step" is named "bracket".
+            let stem = match name.rsplit_once('.') {
+                Some((stem, ext)) if !stem.is_empty() && (ext.eq_ignore_ascii_case("step") || ext.eq_ignore_ascii_case("stp")) => stem.to_owned(),
+                _ => name,
+            };
+            app.session.doc_mut().name = stem;
             app.session.mark_unsaved();
         } else if !ok && !cancelled {
             app.set_status("Could not open design link: the downloaded file is not a valid GE STARR Design design", true);

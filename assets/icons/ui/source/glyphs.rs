@@ -118,51 +118,14 @@ pub(crate) fn brand_mark_silhouette(p: &egui::Painter, c: Pos2, height: f32, ink
     brand_mark_styled(p, c, height, [ink; 3], false);
 }
 
-fn brand_mark_styled(p: &egui::Painter, c: Pos2, height: f32, colours: [Color32; 3], edges: bool) {
-    let s = height / 412.217;
-    let m = |pts: &[(f32, f32)]| -> Vec<egui::Pos2> { pts.iter().map(|&(x, y)| pos2(c.x + (x - 178.5) * s, c.y + (y - 206.1) * s)).collect() };
-    // egui only fills convex shapes, so each face is a few overlapping convex pieces.
-    let face = |col: Color32, pts: &[(f32, f32)]| {
-        p.add(egui::Shape::convex_polygon(m(pts), col, Stroke::NONE));
-    };
-    // The faces are separated by gaps that show the application bar, not by white lines.
-    let [light, mid, dark] = colours;
-    let edge_col = solidcraft_theme::Tokens::get().app_bar;
-    face(light, &[(3.5, 105.9), (177.0, 5.8), (263.4, 55.6), (263.8, 156.0), (177.0, 406.4)]);
-    face(light, &[(177.0, 206.1), (263.8, 156.0), (350.5, 206.2), (350.5, 306.3), (177.0, 406.4)]);
-    face(mid, &[(3.5, 105.9), (177.0, 206.1), (177.0, 406.4)]);
-    face(mid, &[(3.5, 105.9), (3.5, 205.7), (90.3, 256.2), (177.0, 206.1)]);
-    face(mid, &[(177.0, 206.1), (90.3, 256.2), (90.0, 356.2), (177.0, 406.4)]);
-    face(dark, &[(264.1, 155.8), (177.0, 206.1), (177.0, 406.4), (263.8, 256.2)]);
-    face(dark, &[(263.8, 256.2), (350.5, 206.2), (350.5, 306.3), (177.0, 406.4)]);
-    face(dark, &[(177.0, 206.1), (177.0, 406.4), (350.5, 306.3)]);
-    face(dark, &[(263.8, 55.9), (263.8, 156.0), (177.1, 105.9)]);
-    if !edges {
-        return;
-    }
-    // The seams between the faces and around the mark, in the bar's colour, so they read as gaps.
-    let edge = Stroke::new(10.0 * s, edge_col);
-    let line = |pts: &[(f32, f32)]| {
-        p.add(egui::Shape::line(m(pts), edge));
-    };
-    line(&[(263.8, 55.9), (177.1, 105.9), (263.8, 156.0), (263.8, 256.2), (350.6, 206.1)]);
-    line(&[(5.0, 105.9), (178.5, 206.1), (178.5, 406.4)]);
-    line(&[(177.0, 206.1), (263.8, 156.0)]);
-    p.add(egui::Shape::closed_line(
-        m(&[
-            (178.5, 5.8),
-            (5.0, 105.9),
-            (5.0, 206.1),
-            (91.7, 256.2),
-            (91.7, 356.4),
-            (178.5, 406.4),
-            (352.0, 306.3),
-            (352.0, 206.1),
-            (265.2, 156.0),
-            (265.2, 55.9),
-        ]),
-        edge,
-    ));
+fn brand_mark_styled(p: &egui::Painter, c: Pos2, height: f32, colours: [Color32; 3], _edges: bool) {
+    // GE STARR Design's mark: a rounded steel badge with "GS" in navy. The GE STARR mark is two G-shaped curves;
+    // egui fills only convex shapes, so the letters stand in for it here.
+    let [light, _, dark] = colours;
+    let side = height * 1.05;
+    let rect = egui::Rect::from_center_size(c, egui::vec2(side, side));
+    p.rect_filled(rect, side * 0.22, light);
+    p.text(c, egui::Align2::CENTER_CENTER, "GS", egui::FontId::proportional(side * 0.52), dark);
 }
 
 pub(crate) fn cross(p: &egui::Painter, r: Rect, s: Stroke) {

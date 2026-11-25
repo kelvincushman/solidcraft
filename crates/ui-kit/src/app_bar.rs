@@ -231,16 +231,19 @@ pub fn show(ui: &mut egui::Ui, data: &AppBar, bar: Rect, content: Rect) -> BarOu
     let compact = r.right() - left < COMPACT;
     let mut actions = Vec::new();
     (data.mark)(ui.painter(), pos2(left + 20.0, r.center().y));
+    // Home follows the name, however long it is (GE STARR Design is longer than the name this was laid out for).
+    let mut name_end = left + 128.0;
     if !compact {
-        ui.painter().text(
+        let name = ui.painter().text(
             pos2(left + 36.0, r.center().y),
             Align2::LEFT_CENTER,
             data.name,
             crate::type_face::semibold(t.font_heading),
             t.app_bar_text,
         );
+        name_end = name_end.max(name.right() + 32.0);
     }
-    let mut x = left + if compact { 56.0 } else { 128.0 };
+    let mut x = if compact { left + 56.0 } else { name_end };
     // Home.
     let home = Rect::from_center_size(pos2(x - 4.0, r.center().y), vec2(32.0, 32.0));
     let idle = data.home.enabled;
