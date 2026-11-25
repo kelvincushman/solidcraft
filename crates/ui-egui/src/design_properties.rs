@@ -29,7 +29,7 @@ const OTHERS_ROWS: f32 = 6.0;
 
 /// What is being typed; the properties themselves live in the document.
 pub struct DesignProperties {
-    /// Each of SolidCraft's design properties' text when the window opened, in
+    /// Each of GE STARR Design's design properties' text when the window opened, in
     /// `keys(Owner::Design)` order.
     pub opened: Vec<String>,
     /// The fields as edited.
@@ -621,7 +621,7 @@ mod tests {
         }
         let mut h = Harness::new();
         h.app.preferences.language = "en".into();
-        // A key a newer SolidCraft might read: kept as another tool's data, never labelled as one of ours.
+        // A key a newer GE STARR Design might read: kept as another tool's data, never labelled as one of ours.
         h.app.session.doc_mut().metadata.0.insert("future_key".into(), json!("kept"));
         h.step(&json!({"start": "document.metadata"})).unwrap();
         h.frames(2);

@@ -1,4 +1,4 @@
-//! SolidCraft's token contract: every colour and size a UI component draws with ([`Tokens`]), SolidCraft's light and
+//! GE STARR Design's token contract: every colour and size a UI component draws with ([`Tokens`]), GE STARR Design's light and
 //! dark values written in code (a dark theme, the default, a blue-grey in the spirit of desktop CAD tools, viewport
 //! #2e3440, and a light one), colour vision modes, tab accents, and the per-thread and per-context theme state a host
 //! sets. With nothing set, components draw with the built-in dark tokens. It holds no data files and knows no theme
@@ -384,7 +384,7 @@ pub struct Custom {
 
 /// Use a theme file's palette for its base, or the built-in palettes (`None`). Returns whether
 /// that changed anything (the visuals follow on the next [`apply`]). This sets tokens only: a host with an icon
-/// renderer sets that renderer's palette with it (SolidCraft: `theme::set_file_palette`).
+/// renderer sets that renderer's palette with it (GE STARR Design: `theme::set_file_palette`).
 pub fn set_custom(custom: Option<Custom>) -> bool {
     let changed = CUSTOM.with(|c| c.replace(custom) != custom);
     if changed {
@@ -406,7 +406,7 @@ pub fn custom() -> Option<Custom> {
 
 /// Draw with `tokens` as the theme's palette for the current base until the returned guard drops, which restores the
 /// previous one, even when a test's assertion fails. Like [`set_custom`] it sets tokens only, not a host's icon
-/// palette (SolidCraft: `theme::scoped_file`).
+/// palette (GE STARR Design: `theme::scoped_file`).
 pub fn scoped_tokens(tokens: Tokens) -> impl Drop {
     struct Restore(Option<Custom>);
     impl Drop for Restore {
@@ -1251,7 +1251,7 @@ pub struct Tokens {
     pub continuity: [Color32; 4],
     pub analysis: AnalysisColors,
     pub icons: IconColors,
-    /// The SolidCraft mark on the application bar: light, mid and dark faces (the gaps between
+    /// The GE STARR Design mark on the application bar: light, mid and dark faces (the gaps between
     /// them show the bar).
     pub logo: [Color32; 3],
 }

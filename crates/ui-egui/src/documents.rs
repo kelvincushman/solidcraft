@@ -1124,7 +1124,7 @@ pub fn control(app: &mut SolveApp, p: &Value) -> Value {
     })
 }
 
-/// Where SolidCraft's tab strip publishes its parts (scripts and scenarios use these names).
+/// Where GE STARR Design's tab strip publishes its parts (scripts and scenarios use these names).
 const TAB_HANDLES: crate::app_bar::TabHandles<'static> = crate::app_bar::TabHandles {
     tab: "tab:design:",
     close: "tab:close:",
@@ -1516,7 +1516,7 @@ pub(crate) fn saved_for_close(app: &mut SolveApp) {
     batch_step(app);
 }
 
-/// Where SolidCraft's document tab strip keeps its state.
+/// Where GE STARR Design's document tab strip keeps its state.
 fn tab_strip_id() -> egui::Id {
     egui::Id::unique("sc_doc_tabs")
 }

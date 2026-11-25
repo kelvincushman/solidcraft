@@ -978,7 +978,7 @@ impl Gpu {
             ..Default::default()
         });
         let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-            label: Some("SolidCraft blur"),
+            label: Some("GE STARR Design blur"),
             source: wgpu::ShaderSource::Wgsl(include_str!("blur.wgsl").into()),
         });
         let pipeline_layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {

@@ -8,7 +8,7 @@ use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
 use std::time::{Duration, Instant};
 
-/// An agent SolidCraft knows how to start in ACP mode.
+/// An agent GE STARR Design knows how to start in ACP mode.
 pub struct Known {
     pub id: &'static str,
     pub name: &'static str,
@@ -220,7 +220,7 @@ fn home() -> Option<PathBuf> {
 }
 
 /// PATH, then the usual places npm, Homebrew, nvm, Volta, bun, pipx and Grok put commands, and on
-/// Windows Node's own install folders: a launcher can start SolidCraft with a PATH that lacks
+/// Windows Node's own install folders: a launcher can start GE STARR Design with a PATH that lacks
 /// them, and an npm agent's `.cmd` shim then can't find `node` (#9297).
 pub fn search_dirs() -> Vec<PathBuf> {
     search_dirs_in(&|name| std::env::var_os(name), cfg!(windows))
@@ -912,7 +912,7 @@ mod tests {
         let _ = std::fs::remove_dir_all(root);
     }
 
-    /// A launcher can start SolidCraft with a PATH that lacks Node (#9297). On Windows, Node's
+    /// A launcher can start GE STARR Design with a PATH that lacks Node (#9297). On Windows, Node's
     /// install folders are searched after it, so `node` is found, and an agent started with these
     /// folders as its PATH (`command_for`) finds it too.
     #[test]
@@ -932,7 +932,7 @@ mod tests {
             }
         };
         let dirs = search_dirs_in(&env, true);
-        assert_eq!(dirs.first(), Some(&system), "the PATH SolidCraft was given comes first");
+        assert_eq!(dirs.first(), Some(&system), "the PATH GE STARR Design was given comes first");
         for node in [program_files.join("nodejs"), x86.join("nodejs"), nvm.clone()] {
             assert!(dirs.contains(&node), "{} in {dirs:?}", node.display());
         }

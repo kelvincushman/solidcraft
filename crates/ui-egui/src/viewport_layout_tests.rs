@@ -4,7 +4,7 @@ use crate::viewport::NavMode;
 use serde_json::json;
 use solidcraft_viewport::StandardView;
 
-/// SolidCraft's default navigation bar measured on `canvas` with `caps`.
+/// GE STARR Design's default navigation bar measured on `canvas` with `caps`.
 fn default_bar(canvas: Rect, caps: crate::navigation::NavCaps) -> Rect {
     crate::navigation_slots::install();
     crate::ui_kit::nav_bar_layout::measure(canvas, &Default::default(), |slot| caps.shows(slot), |_| 0.0).rect

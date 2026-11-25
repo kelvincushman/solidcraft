@@ -1,5 +1,5 @@
 //! Table-driven layout/paint references in both themes. No window or GPU required. Every
-//! specimen here is drawn from plain data; a host's own gallery (SolidCraft's
+//! specimen here is drawn from plain data; a host's own gallery (GE STARR Design's
 //! `kit_gallery_tests`) adds the specimens drawn from its data and checks them with
 //! [`check_elements`].
 use super::preferences_figures::{ThemeSample, paint_theme_thumbnail};
@@ -859,7 +859,7 @@ pub const ELEMENTS: &[Element] = &[
     element!("help_icon", |ui, _| {
         ui.horizontal(|ui| {
             text(ui, "Anti-aliasing", Text::Hint("gallery_help"));
-            help_icon(ui, "Applies when SolidCraft restarts.");
+            help_icon(ui, "Applies when GE STARR Design restarts.");
         });
     }),
     element!("preference_theme_thumbnails", |ui, _| {
@@ -1106,7 +1106,7 @@ pub const ELEMENTS: &[Element] = &[
             "gallery:recovery",
             super::file_view::RecoveryMessage {
                 title: "1 design was recovered",
-                before_filename: " after SolidCraft closed unexpectedly: ",
+                before_filename: " after GE STARR Design closed unexpectedly: ",
                 filename: "enclosure-lid.sc",
                 after_filename: ", 2 minutes ago.",
             },

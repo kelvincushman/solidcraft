@@ -52,8 +52,8 @@ fn install_kinds_are_told_apart() {
     assert_eq!(snap("12"), InstallKind::Snap { store: true });
     assert_eq!(snap("x3"), InstallKind::Snap { store: false }, "installed from a file with --dangerous");
     assert_eq!(
-        probe("linux", true, &[("APPIMAGE", "/home/me/SolidCraft.AppImage")], "/tmp/.mount_SolidXYZ/usr/bin/solidcraft", &[]),
-        InstallKind::AppImage("/home/me/SolidCraft.AppImage".into())
+        probe("linux", true, &[("APPIMAGE", "/home/me/GE STARR Design.AppImage")], "/tmp/.mount_SolidXYZ/usr/bin/solidcraft", &[]),
+        InstallKind::AppImage("/home/me/GE STARR Design.AppImage".into())
     );
     // An empty variable doesn't count.
     assert_eq!(probe("linux", true, &[("APPIMAGE", "")], "/opt/sc/bin/solidcraft", &[]), InstallKind::LinuxTarball);
@@ -64,8 +64,8 @@ fn install_kinds_are_told_apart() {
     assert_eq!(probe("linux", true, &[], home, &[]), InstallKind::LinuxTarball);
 
     let pf = [("ProgramFiles", "C:\\Program Files"), ("ProgramFiles(x86)", "C:\\Program Files (x86)")];
-    assert_eq!(probe("windows", true, &pf, "C:\\Program Files\\SolidCraft\\solidcraft.exe", &[]), InstallKind::WindowsMsi);
-    assert_eq!(probe("windows", true, &pf, "c:\\program files\\SolidCraft\\solidcraft.exe", &[]), InstallKind::WindowsMsi, "case-insensitive");
+    assert_eq!(probe("windows", true, &pf, "C:\\Program Files\\GE STARR Design\\solidcraft.exe", &[]), InstallKind::WindowsMsi);
+    assert_eq!(probe("windows", true, &pf, "c:\\program files\\GE STARR Design\\solidcraft.exe", &[]), InstallKind::WindowsMsi, "case-insensitive");
     // "C:\Program Files Extra" is not under "C:\Program Files".
     assert_eq!(probe("windows", true, &pf, "C:\\Program Files Extra\\solidcraft.exe", &[]), InstallKind::WindowsExe);
     let portable = "C:\\Users\\me\\solidcraft-0.10.0-windows-x64-portable\\solidcraft.exe";
@@ -74,14 +74,14 @@ fn install_kinds_are_told_apart() {
     if cfg!(windows) {
         assert_eq!(probe("windows", true, &pf, portable, &[cli]), InstallKind::WindowsPortable);
     }
-    assert_eq!(probe("windows", true, &pf, "C:\\Users\\me\\Downloads\\SolidCraft-0.10.0-windows-x64.exe", &[]), InstallKind::WindowsExe);
+    assert_eq!(probe("windows", true, &pf, "C:\\Users\\me\\Downloads\\GE STARR Design-0.10.0-windows-x64.exe", &[]), InstallKind::WindowsExe);
 
     assert_eq!(
-        probe("macos", true, &[], "/Applications/SolidCraft.app/Contents/MacOS/solidcraft", &[]),
-        InstallKind::MacApp("/Applications/SolidCraft.app".into())
+        probe("macos", true, &[], "/Applications/GE STARR Design.app/Contents/MacOS/solidcraft", &[]),
+        InstallKind::MacApp("/Applications/GE STARR Design.app".into())
     );
     assert_eq!(probe("macos", true, &[], "/usr/local/bin/solidcraft", &[]), InstallKind::Other);
-    assert_eq!(probe("macos", false, &[], "/Applications/SolidCraft.app/Contents/MacOS/solidcraft", &[]), InstallKind::Dev);
+    assert_eq!(probe("macos", false, &[], "/Applications/GE STARR Design.app/Contents/MacOS/solidcraft", &[]), InstallKind::Dev);
     assert_eq!(probe("freebsd", true, &[], "/usr/local/bin/solidcraft", &[]), InstallKind::Other);
     assert!(!InstallKind::Dev.checks() && !InstallKind::Web.checks() && InstallKind::Snap { store: true }.checks());
     assert!(!InstallKind::Flatpak(APP_ID.into()).checks(), "the Flatpak has no network permission; Flatpak updates it");
@@ -98,11 +98,11 @@ fn portable_windows_layout_is_recognised() {
     );
 }
 
-/// #1870: the installer's wizard can put SolidCraft anywhere, and it puts solidcraft-cli.exe
+/// #1870: the installer's wizard can put GE STARR Design anywhere, and it puts solidcraft-cli.exe
 /// beside it as the portable zip does. The folder it recorded is what tells its copy apart.
 #[test]
 fn an_msi_install_outside_program_files_is_recognised() {
-    let exe = PathBuf::from(r"D:\Program Files\SolidCraft\solidcraft.exe");
+    let exe = PathBuf::from(r"D:\Program Files\GE STARR Design\solidcraft.exe");
     let get = |k: &str| match k {
         "ProgramFiles" | "ProgramW6432" => Some(r"C:\Program Files".to_string()),
         "ProgramFiles(x86)" => Some(r"C:\Program Files (x86)".to_string()),
@@ -114,7 +114,7 @@ fn an_msi_install_outside_program_files_is_recognised() {
         detect(&Probe { os: "windows", release_build: true, env: &get, exe: Some(exe.clone()), exists: &exists, msi_dir: msi_dir.map(PathBuf::from) })
     };
     // The installer records [INSTALLFOLDER], which ends in a backslash; Windows paths ignore case.
-    assert_eq!(kind(Some(r"D:\Program Files\SolidCraft\")), InstallKind::WindowsMsi);
+    assert_eq!(kind(Some(r"D:\Program Files\GE STARR Design\")), InstallKind::WindowsMsi);
     assert_eq!(kind(Some(r"d:\program files\solidcraft")), InstallKind::WindowsMsi);
     // No installer copy here: the portable zip, as before.
     assert_eq!(kind(None), InstallKind::WindowsPortable);
@@ -130,7 +130,7 @@ fn release() -> Release {
         "solidcraft-0.10.0-linux-x86_64.AppImage.zsync",
         "solidcraft-0.10.0-linux-x86_64.tar.gz",
         "solidcraft-0.10.0-linux-aarch64.tar.gz",
-        "SolidCraft-0.10.0-windows-x64.exe",
+        "GE STARR Design-0.10.0-windows-x64.exe",
         "solidcraft-linux-aarch64.AppImage",
         "solidcraft-linux-aarch64.deb",
         "solidcraft-linux-x86_64.AppImage",
@@ -151,7 +151,7 @@ fn release() -> Release {
         .map(|n| json!({"name": n, "size": 10, "browser_download_url": format!("https://github.com/bherbruck/solidcraft/releases/download/v0.10.0/{n}")}))
         .collect();
     let body = json!({
-        "tag_name": "v0.10.0", "name": "SolidCraft v0.10.0", "body": "**What's new**\n\n- Surface tools.",
+        "tag_name": "v0.10.0", "name": "GE STARR Design v0.10.0", "body": "**What's new**\n\n- Surface tools.",
         "html_url": "https://github.com/bherbruck/solidcraft/releases/tag/v0.10.0", "draft": false, "prerelease": false, "assets": assets,
     });
     Release::parse(body.to_string().as_bytes()).unwrap()
@@ -170,7 +170,7 @@ fn each_installation_gets_its_own_file() {
     assert_eq!(name(InstallKind::WindowsMsi, "aarch64").as_deref(), Some("solidcraft-windows-arm64.msi"));
     assert_eq!(name(InstallKind::WindowsMsi, "x86").as_deref(), Some("solidcraft-windows-x86.msi"));
     assert_eq!(name(InstallKind::WindowsPortable, "x86_64").as_deref(), Some("solidcraft-windows-x64-portable.zip"));
-    assert_eq!(name(InstallKind::WindowsExe, "x86_64").as_deref(), Some("SolidCraft-0.10.0-windows-x64.exe"));
+    assert_eq!(name(InstallKind::WindowsExe, "x86_64").as_deref(), Some("GE STARR Design-0.10.0-windows-x64.exe"));
     assert_eq!(name(InstallKind::WindowsExe, "aarch64").as_deref(), Some("solidcraft-windows-arm64-portable.zip"));
     assert_eq!(name(InstallKind::MacApp("/A.app".into()), "aarch64").as_deref(), Some("solidcraft-macos-universal.dmg"));
     assert_eq!(name(InstallKind::Other, "x86_64"), None);
@@ -220,7 +220,7 @@ fn release_answers_are_checked() {
     .unwrap();
     assert_eq!(r.page, RELEASES_PAGE);
     assert_eq!(r.assets.len(), 1);
-    assert_eq!(r.name, "SolidCraft v1.0.0");
+    assert_eq!(r.name, "GE STARR Design v1.0.0");
     // Huge notes are cut (on a character boundary).
     let r = Release::parse(json!({"tag_name": "v1.0.0", "body": "é".repeat(MAX_NOTES)}).to_string().as_bytes()).unwrap();
     assert!(r.notes.len() <= MAX_NOTES + 8 && r.notes.ends_with('…'));
@@ -305,7 +305,7 @@ fn next_release_feed(dir: &Path) -> (PathBuf, String) {
     let path = dir.join("latest.json");
     let body = json!({
         "tag_name": format!("v{v}"),
-        "name": format!("SolidCraft {v}"),
+        "name": format!("GE STARR Design {v}"),
         "body": "## What's new\n\n- Faster rebuilds.",
         "html_url": format!("https://github.com/bherbruck/solidcraft/releases/tag/v{v}"),
         "assets": []
@@ -367,7 +367,7 @@ fn help_menu_checks_with_automatic_checks_off_and_offers_installation() {
     h.app.preferences.update.skipped = format!("v{version}");
     h.app.preferences.update.remind_after = unix_now() + REMIND_DELAY_S;
     h.app.updater.feed = Some(feed);
-    h.app.updater.kind = Some(InstallKind::MacApp("/Applications/SolidCraft.app".into()));
+    h.app.updater.kind = Some(InstallKind::MacApp("/Applications/GE STARR Design.app".into()));
     h.app.updater.managed = Some(None);
     h.app.services.http_get = Some(Arc::new(|_| panic!("the check must use the test feed")));
     h.app.services.http_download = Some(Arc::new(|_, _, _| panic!("offering an update must not install it")));
@@ -381,7 +381,7 @@ fn help_menu_checks_with_automatic_checks_off_and_offers_installation() {
     assert!(h.app.updater.open);
     assert!(h.app.preferences.update.skipped.is_empty());
     assert_eq!(h.app.preferences.update.remind_after, 0.0);
-    assert!(h.widget(&format!("SolidCraft {version} is available")).is_some());
+    assert!(h.widget(&format!("GE STARR Design {version} is available")).is_some());
     assert!(h.widget("Download and open").is_some(), "the macOS installation is offered immediately");
     assert!(h.app.updater.job.is_none());
 }
@@ -413,7 +413,7 @@ fn help_check_shows_progress_and_up_to_date_then_closes() {
     tx.send(Ok(release)).unwrap();
     h.frames(2);
     assert_eq!(h.app.updater.status, Status::UpToDate);
-    assert!(h.widget("SolidCraft is up to date.").is_some());
+    assert!(h.widget("GE STARR Design is up to date.").is_some());
     assert!(h.widget("Download").is_none() && h.widget("Update now").is_none());
     let [x, y] = h.widget("Close").unwrap();
     h.call("ui.click", json!({"x": x, "y": y}));
@@ -421,7 +421,7 @@ fn help_check_shows_progress_and_up_to_date_then_closes() {
     // Reopening during the cooldown still shows the result, without another request.
     h.app.updater.last_manual = unix_now();
     h.call("ui.help", json!({"item": "updates"}));
-    assert!(h.widget("SolidCraft is up to date.").is_some());
+    assert!(h.widget("GE STARR Design is up to date.").is_some());
     assert!(h.app.updater.rx.is_none());
 }
 
@@ -434,7 +434,7 @@ fn help_check_reports_network_errors_and_rate_limits_in_the_window() {
         h.frames(2);
         assert_eq!(h.app.updater.status, Status::Failed(error.to_string()));
         assert!(h.widget(&format!("Couldn't check: {error}")).is_some());
-        assert!(h.widget("SolidCraft is up to date.").is_none());
+        assert!(h.widget("GE STARR Design is up to date.").is_none());
         if matches!(error, FetchError::RateLimited { .. }) {
             h.call("ui.help", json!({"item": "updates"}));
             assert!(h.app.updater.rx.is_none(), "the server's rate limit is honoured");
@@ -451,16 +451,16 @@ fn help_check_result_follows_the_selected_language() {
     let release = Release::parse(json!({"tag_name": current_version(), "assets": []}).to_string().as_bytes()).unwrap();
     tx.send(Ok(release)).unwrap();
     h.frames(2);
-    assert!(h.widget("SolidCraft ist aktuell.").is_some());
+    assert!(h.widget("GE STARR Design ist aktuell.").is_some());
     for (language, title, message) in [
-        ("fr", "Rechercher des mises à jour", "SolidCraft est à jour."),
-        ("ja", "アップデートを確認", "SolidCraft は最新です。"),
-        ("zh-TW", "檢查更新", "SolidCraft 已是最新版本。"),
+        ("fr", "Rechercher des mises à jour", "GE STARR Design est à jour."),
+        ("ja", "アップデートを確認", "GE STARR Design は最新です。"),
+        ("zh-TW", "檢查更新", "GE STARR Design 已是最新版本。"),
     ] {
         h.call("ui.prefs", json!({"language": language}));
         assert!(h.widget(title).is_some(), "the window title follows {language}");
         assert!(h.widget(message).is_some(), "the result follows {language}");
-        assert!(h.widget("SolidCraft is up to date.").is_none());
+        assert!(h.widget("GE STARR Design is up to date.").is_none());
     }
 }
 
@@ -470,7 +470,7 @@ fn help_check_explains_when_checks_are_unavailable() {
     h.app.updater.off = true;
     h.call("ui.help", json!({"item": "updates"}));
     assert!(h.widget("Update checks are not available for this installation.").is_some());
-    assert!(h.widget("SolidCraft is up to date.").is_none());
+    assert!(h.widget("GE STARR Design is up to date.").is_none());
     assert!(h.app.updater.rx.is_none());
 }
 
@@ -708,7 +708,7 @@ fn the_version_links_to_its_release_notes() {
 fn unavailable_preferences_show_disabled_update_controls_and_real_values() {
     use egui::accesskit::{Role, Toggled};
     let _language = solidcraft_ui_text::scope("en");
-    for kind in [InstallKind::Dev, InstallKind::Web, InstallKind::Flatpak("io.solidcraft.SolidCraft".into())] {
+    for kind in [InstallKind::Dev, InstallKind::Web, InstallKind::Flatpak("io.solidcraft.GE STARR Design".into())] {
         for checked in [false, true] {
             let mut h = crate::scenario::Harness::new();
             h.app.home.open = false;
@@ -830,7 +830,7 @@ fn the_variable_names_the_manager() {
 
 #[test]
 fn the_launchers_record_marks_the_install_it_made() {
-    let exe = Path::new("/home/me/Apps/SolidCraft.AppImage");
+    let exe = Path::new("/home/me/Apps/GE STARR Design.AppImage");
     let appimage = InstallKind::AppImage(exe.to_path_buf());
     let env = |k: &str| (k == "HOME").then(|| "/home/me".to_string());
     let seen = std::cell::RefCell::new(Vec::new());
@@ -843,17 +843,17 @@ fn the_launchers_record_marks_the_install_it_made() {
     };
     // The AppImage the launcher recorded; the running executable is inside its mount.
     let run = |path: &str| managed_by("linux", &env, Some(Path::new("/tmp/.mount_SolidXYZ/usr/bin/solidcraft")), &appimage, &read(record(path)));
-    assert_eq!(run("/home/me/Apps/SolidCraft.AppImage").as_deref(), Some("ArtCraft Launcher"));
+    assert_eq!(run("/home/me/Apps/GE STARR Design.AppImage").as_deref(), Some("ArtCraft Launcher"));
     assert_eq!(seen.borrow().as_slice(), [PathBuf::from("/home/me/.local/share/artcraft-launcher/installed.json")]);
     // Another copy, a prefix that is not a folder of ours, the root and a relative path are not ours.
     assert_eq!(run("/home/me/Apps/Other.AppImage"), None);
-    assert_eq!(run("/home/me/Apps/SolidCraft.AppImage.old"), None);
+    assert_eq!(run("/home/me/Apps/GE STARR Design.AppImage.old"), None);
     assert_eq!(run("/"), None);
-    assert_eq!(run("Apps/SolidCraft.AppImage"), None);
-    // No record, a damaged one, one without SolidCraft, and a record file of any other shape.
+    assert_eq!(run("Apps/GE STARR Design.AppImage"), None);
+    // No record, a damaged one, one without GE STARR Design, and a record file of any other shape.
     let one = |bytes: &'static [u8]| managed_by("linux", &env, Some(exe), &appimage, &|_: &Path| Some(bytes.to_vec()));
     assert_eq!(one(b"{not json"), None);
-    assert_eq!(one(br#"{"apps": {"photocraft": {"path": "/home/me/Apps/SolidCraft.AppImage"}}}"#), None);
+    assert_eq!(one(br#"{"apps": {"photocraft": {"path": "/home/me/Apps/GE STARR Design.AppImage"}}}"#), None);
     assert_eq!(one(br#"{"apps": {"solidcraft": {"path": 7}}}"#), None);
     assert_eq!(one(b"[]"), None);
     assert_eq!(managed_by("linux", &env, Some(exe), &appimage, &|_: &Path| None), None);
@@ -880,18 +880,18 @@ fn the_record_matches_folders_bundles_and_windows_paths() {
     let home = |k: &str| (k == "HOME").then(|| "/home/me/.local/share/artcraft-launcher/apps/solidcraft/home".to_string());
     assert_eq!(managed_by("linux", &home, Some(exe), &InstallKind::LinuxTarball, &read).as_deref(), Some("ArtCraft Launcher"));
     // macOS: the bundle.
-    let bundle = PathBuf::from("/Applications/SolidCraft.app");
+    let bundle = PathBuf::from("/Applications/GE STARR Design.app");
     let mac = InstallKind::MacApp(bundle.clone());
-    let exe = Path::new("/Applications/SolidCraft.app/Contents/MacOS/solidcraft");
+    let exe = Path::new("/Applications/GE STARR Design.app/Contents/MacOS/solidcraft");
     let home = |k: &str| (k == "HOME").then(|| "/Users/me".to_string());
     let read = |p: &Path| {
         assert_eq!(p, Path::new("/Users/me/Library/Application Support/ArtCraft Launcher/installed.json"));
-        Some(record("/Applications/SolidCraft.app"))
+        Some(record("/Applications/GE STARR Design.app"))
     };
     assert_eq!(managed_by("macos", &home, Some(exe), &mac, &read).as_deref(), Some("ArtCraft Launcher"));
     // Windows: case and the verbatim prefix don't matter, and the record is under LOCALAPPDATA.
     let local = |k: &str| (k == "LOCALAPPDATA").then(|| r"C:\Users\me\AppData\Local".to_string());
-    let exe = Path::new(r"C:\Users\me\AppData\Local\Programs\SolidCraft\solidcraft.exe");
+    let exe = Path::new(r"C:\Users\me\AppData\Local\Programs\GE STARR Design\solidcraft.exe");
     let read = nothing_else(record(r"\\?\c:\users\me\appdata\local\programs\solidcraft\SOLIDCRAFT.EXE"));
     assert_eq!(managed_by("windows", &local, Some(exe), &InstallKind::WindowsExe, &read).as_deref(), Some("ArtCraft Launcher"));
     let read = nothing_else(record(r"C:\Users\me\AppData\Local\Programs\SolidCraft2"));
@@ -911,7 +911,7 @@ fn open_update_window(managed: Option<&str>) -> (crate::scenario::Harness, Scrat
     let download: install::HttpDownload = Arc::new(|_, _, _| Err(FetchError::Failed("offline".into())));
     h.app.services.http_get = Some(get);
     h.app.services.http_download = Some(download);
-    h.app.updater.kind = Some(InstallKind::AppImage("/home/me/SolidCraft.AppImage".into()));
+    h.app.updater.kind = Some(InstallKind::AppImage("/home/me/GE STARR Design.AppImage".into()));
     h.app.updater.managed = Some(managed.map(str::to_string));
     h.app.updater.feed = Some(feed);
     h.frame();
@@ -926,7 +926,7 @@ fn open_update_window(managed: Option<&str>) -> (crate::scenario::Harness, Scrat
 fn a_managed_install_points_to_its_manager_instead_of_updating_itself() {
     let (mut h, _dir) = open_update_window(Some("ArtCraft Launcher"));
     assert_eq!(install_method(&mut h.app), None, "no AppImage self-replace");
-    assert!(h.widget("Update available: update SolidCraft in ArtCraft Launcher").is_some());
+    assert!(h.widget("Update available: update GE STARR Design in ArtCraft Launcher").is_some());
     for gone in ["Update now", "Download", "Open release page"] {
         assert!(h.widget(gone).is_none(), "{gone} is not offered");
     }
@@ -939,10 +939,10 @@ fn a_managed_install_points_to_its_manager_instead_of_updating_itself() {
 #[test]
 fn an_unmanaged_install_updates_itself_as_before() {
     let (mut h, _dir) = open_update_window(None);
-    assert_eq!(install_method(&mut h.app), Some(install::Method::AppImage("/home/me/SolidCraft.AppImage".into())));
+    assert_eq!(install_method(&mut h.app), Some(install::Method::AppImage("/home/me/GE STARR Design.AppImage".into())));
     assert!(h.widget("Update now").is_some());
     assert!(h.widget("Download").is_some());
-    assert!(h.widget("Update available: update SolidCraft in ArtCraft Launcher").is_none());
+    assert!(h.widget("Update available: update GE STARR Design in ArtCraft Launcher").is_none());
 }
 
 #[test]
@@ -955,7 +955,7 @@ fn periodic_checks_refresh_the_offered_label() {
     wait_for_check(&mut h);
     h.frames(2);
     assert!(h.widget(&format!("Update to {first}")).is_some());
-    h.app.updater.installed = Some(Ok(install::Outcome::Restart(dir.0.join("SolidCraft.AppImage"))));
+    h.app.updater.installed = Some(Ok(install::Outcome::Restart(dir.0.join("GE STARR Design.AppImage"))));
     let v = parse_version(&first).unwrap();
     let next = format!("{}.{}.0", v.major, v.minor + 1);
     std::fs::write(feed, json!({"tag_name": format!("v{next}")}).to_string()).unwrap();
@@ -970,7 +970,7 @@ fn periodic_checks_refresh_the_offered_label() {
 #[test]
 fn install_selection_refreshes_the_button_and_progress_before_completion() {
     let dir = scratch();
-    let target = dir.0.join("SolidCraft.AppImage");
+    let target = dir.0.join("GE STARR Design.AppImage");
     let name = asset_name(&InstallKind::AppImage(target.clone()), std::env::consts::ARCH, "999.1.0").unwrap();
     let mut h = crate::scenario::Harness::new();
     h.app.preferences.check_updates = false;
@@ -1014,7 +1014,7 @@ fn cancel_download_leaves_downloading_immediately() {
     // Cancel must clear the job from the UI at once so the card leaves "Downloading" without
     // waiting for a stalled feed or checksum GET (#8908).
     let dir = scratch();
-    let target = dir.0.join("SolidCraft.AppImage");
+    let target = dir.0.join("GE STARR Design.AppImage");
     let name = asset_name(&InstallKind::AppImage(target.clone()), std::env::consts::ARCH, "999.1.0").unwrap();
     let mut h = crate::scenario::Harness::new();
     h.app.preferences.check_updates = false;

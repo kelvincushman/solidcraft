@@ -7,7 +7,7 @@ use solidcraft_ui_registry as registry;
 use std::collections::HashMap;
 
 /// The kit's own English test catalog: the messages its tests read, with the same English a host
-/// gives them. Catalogs are host data; the kit's tests never rely on SolidCraft's.
+/// gives them. Catalogs are host data; the kit's tests never rely on GE STARR Design's.
 static ENGLISH: solidcraft_ui_text::Catalog = solidcraft_ui_text::Catalog::new("en", "English", include_str!("test_support/catalog.json"));
 static CATALOGS: [&solidcraft_ui_text::Catalog; 1] = [&ENGLISH];
 

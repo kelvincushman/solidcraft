@@ -441,7 +441,7 @@ pub fn begin_request(app: &mut SolveApp, mut request: Request) -> Result<(), Str
     }
     #[cfg(not(target_arch = "wasm32"))]
     {
-        // A design open in another SolidCraft asks first (#5467).
+        // A design open in another GE STARR Design asks first (#5467).
         let Some(request) = crate::open_elsewhere::check_open(app, request) else { return Ok(()) };
         queue(app, request)
     }
@@ -666,7 +666,7 @@ fn start(app: &mut SolveApp) {
                 let picture = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| partial_picture(&partial.world, &stop))).ok().flatten();
                 if solidcraft_engine::geom::env::var_os("PROFILE_OPEN").is_some() {
                     eprintln!(
-                        "SolidCraft partial picture: features={} bodies={} drawn={} ms={:.1}",
+                        "GE STARR Design partial picture: features={} bodies={} drawn={} ms={:.1}",
                         partial.features,
                         partial.world.bodies.len(),
                         picture.is_some(),
@@ -703,7 +703,7 @@ fn start(app: &mut SolveApp) {
                     if let Some(picture) = picture.filter(|_| !progress.is_cancelled()) {
                         let _ = preview_tx.send(picture);
                         if solidcraft_engine::geom::env::var_os("PROFILE_OPEN").is_some() {
-                            eprintln!("SolidCraft saved preview: ready_ms={:.3}", preview_began.elapsed().as_secs_f64() * 1000.0);
+                            eprintln!("GE STARR Design saved preview: ready_ms={:.3}", preview_began.elapsed().as_secs_f64() * 1000.0);
                         }
                     }
                 }
@@ -1141,7 +1141,7 @@ fn compute(
     let view_ms = view_began.elapsed().as_secs_f64() * 1000.0;
     if profile {
         eprintln!(
-            "SolidCraft open phases: geometry_ms={geometry_ms:.3} placement_ms={placement_ms:.3} tessellation_ms={tessellation_ms:.3} display_warmup_ms={view_ms:.3} total_ms={:.3}",
+            "GE STARR Design open phases: geometry_ms={geometry_ms:.3} placement_ms={placement_ms:.3} tessellation_ms={tessellation_ms:.3} display_warmup_ms={view_ms:.3} total_ms={:.3}",
             began.elapsed().as_secs_f64() * 1000.0
         );
     }

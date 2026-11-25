@@ -195,7 +195,7 @@ impl Context {
             return String::new();
         }
         let placed = !self.groups.is_empty();
-        let mut out = format!("[Selected in SolidCraft when this message was sent: {} item(s). ", self.total());
+        let mut out = format!("[Selected in GE STARR Design when this message was sent: {} item(s). ", self.total());
         if placed {
             out.push_str("A mark like «1: …» in the message stands for the numbered group below, at the place where the user picked it. ");
         }

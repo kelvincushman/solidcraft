@@ -322,7 +322,7 @@ fn newly_catalogued_dialog_labels_show_in_german() {
     assert!(h.widget("ISO metric").is_none(), "the label must not fall back to English");
 }
 
-/// The kit's widgets in SolidCraft's languages: they translate labels once, show options in the
+/// The kit's widgets in GE STARR Design's languages: they translate labels once, show options in the
 /// user's language and fit German text.
 mod kit_translation {
     use crate::scenario;

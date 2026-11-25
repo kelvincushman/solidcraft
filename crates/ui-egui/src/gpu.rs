@@ -82,17 +82,17 @@ pub(crate) fn tick_tessellation(app: &mut crate::SolveApp) {
         if let Some(gpu) = app.viewport.gpu.as_mut() {
             gpu.tess = true;
             #[cfg(not(target_arch = "wasm32"))]
-            solidcraft_engine::note!("SolidCraft graphics: GPU tessellation ready; bodies are evaluated on the GPU from now on");
+            solidcraft_engine::note!("GE STARR Design graphics: GPU tessellation ready; bodies are evaluated on the GPU from now on");
         }
     }
 }
 
-/// SolidCraft's report of a GPU error no error scope caught
+/// GE STARR Design's report of a GPU error no error scope caught
 /// ([`solidcraft_viewport_egui::log_uncaptured_errors`] logs it too): a line on stderr, which a
 /// terminal or crash report shows beside the app's own lines.
 pub(crate) fn report_gpu_error(e: &wgpu::Error) {
     #[cfg(not(target_arch = "wasm32"))]
-    solidcraft_engine::note!("SolidCraft graphics: {e}");
+    solidcraft_engine::note!("GE STARR Design graphics: {e}");
     #[cfg(target_arch = "wasm32")]
     let _ = e;
 }

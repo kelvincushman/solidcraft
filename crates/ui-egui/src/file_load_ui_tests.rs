@@ -635,9 +635,9 @@ fn a_control_import_passes_up_and_names_on() {
     let mut src = Session::default();
     src.execute("solid.box", &json!({"length": 10, "width": 40, "height": 5})).unwrap();
     src.execute("file.export", &json!({"path": path})).unwrap();
-    // Another program's file: SolidCraft's own exports are not offered (#5150).
+    // Another program's file: GE STARR Design's own exports are not offered (#5150).
     let text = std::fs::read_to_string(&path).unwrap();
-    std::fs::write(&path, text.replace("'SolidCraft','SolidCraft'", "'SolidCraft','Example CAD'")).unwrap();
+    std::fs::write(&path, text.replace("'GE STARR Design','GE STARR Design'", "'GE STARR Design','Example CAD'")).unwrap();
 
     // The reply, the part's height and whether the offer is up, for an import by this window.
     let import = |params: serde_json::Value| {
@@ -1032,7 +1032,7 @@ fn an_opened_design_comes_up_at_the_home_view() {
     let _ = std::fs::remove_dir_all(&dir);
 }
 
-/// A design a newer SolidCraft saved opens in the window: the status line says so without a
+/// A design a newer GE STARR Design saved opens in the window: the status line says so without a
 /// dialog, Messages names what wasn't read, and editing that feature says why it can't be edited.
 #[test]
 fn a_newer_design_opens_with_a_notice_and_no_dialog() {
@@ -1050,7 +1050,7 @@ fn a_newer_design_opens_with_a_notice_and_no_dialog() {
     app.open_path(&path.to_string_lossy());
 
     let (text, _, error) = app.status.clone().unwrap();
-    assert_eq!(text, format!("Saved by a newer SolidCraft (format {newer}, this version reads up to {reads}). If something's missing, update."));
+    assert_eq!(text, format!("Saved by a newer GE STARR Design (format {newer}, this version reads up to {reads}). If something's missing, update."));
     assert!(!error);
     assert!(app.dialog.is_none());
     assert!(app.messages.iter().any(|m| m.text.contains("Lattice1") && m.text.contains("Saving keeps it")));

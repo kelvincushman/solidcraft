@@ -153,7 +153,7 @@ fn copy_leaves_text_on_the_system_clipboard_so_paste_can_follow() {
             _ => None,
         }));
     }
-    assert!(copied.iter().any(|t| t.starts_with("SolidCraft sketch geometry")), "{copied:?}");
+    assert!(copied.iter().any(|t| t.starts_with("GE STARR Design sketch geometry")), "{copied:?}");
 }
 
 #[test]
@@ -218,7 +218,7 @@ fn completed_sketch_copies_and_pastes_into_a_new_design() {
     select(&mut h.app, json!({"type": "feature", "id": id}));
     clipboard_event(&mut h, egui::Event::Copy, None);
     crate::documents::new_tab(&mut h.app);
-    clipboard_event(&mut h, egui::Event::Paste("SolidCraft features".into()), None);
+    clipboard_event(&mut h, egui::Event::Paste("GE STARR Design features".into()), None);
     assert_eq!(h.app.session.doc.features.len(), 1, "{:?}", h.app.status);
     let copied = &h.app.session.doc.features[0];
     let sketch = h.app.session.doc.sketch(copied.id).unwrap();
@@ -243,7 +243,7 @@ fn sketch_geometry_copies_into_a_sketch_of_another_design() {
     let menu = crate::context_menu::items(&h.app, &crate::context_menu::Target::Viewport);
     assert!(menu.iter().any(|i| i.id == "ui.paste" && i.enabled), "the sketch menu's Paste is on");
     let undo = h.app.session.undo.len();
-    clipboard_event(&mut h, egui::Event::Paste("SolidCraft sketch geometry".into()), Some([60.0, 40.0]));
+    clipboard_event(&mut h, egui::Event::Paste("GE STARR Design sketch geometry".into()), Some([60.0, 40.0]));
     let pasted = curves(&h);
     assert_eq!(pasted.len(), 4, "{:?}", h.app.status);
     let corner = start(&h, &pasted[0]);
@@ -481,7 +481,7 @@ fn contribution_native_copy_paste_events_insert_the_saved_design_in_another_tab(
     clipboard_event(&mut h, egui::Event::Copy, None);
     assert!(h.app.linked_design_clipboard.is_some());
     crate::documents::open_tab(&mut h.app, solidcraft_engine::Session::default()).unwrap();
-    clipboard_event(&mut h, egui::Event::Paste("SolidCraft linked design".into()), None);
+    clipboard_event(&mut h, egui::Event::Paste("GE STARR Design linked design".into()), None);
     assert_eq!(h.app.session.doc.links.len(), 1, "{:?}", h.app.status);
     assert_eq!(h.app.session.undo.len(), 1);
 }

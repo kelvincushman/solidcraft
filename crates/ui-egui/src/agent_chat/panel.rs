@@ -18,7 +18,7 @@ pub const MAX_WIDTH: f32 = 760.0;
 const STRIP: f32 = 30.0;
 
 /// Where the panel is and how it is folded: the panel's own preferences. The host keeps them (in
-/// SolidCraft, its Preferences, so they come back next time); the panel reads and changes this copy.
+/// GE STARR Design, its Preferences, so they come back next time); the panel reads and changes this copy.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct AgentPanelPrefs {
     /// Docked on the left edge (else the right).
@@ -258,7 +258,7 @@ pub struct PanelView {
 }
 
 impl PanelView {
-    /// The view of SolidCraft's state the panel draws from now.
+    /// The view of GE STARR Design's state the panel draws from now.
     pub fn of(app: &mut SolveApp, ctx: &egui::Context) -> Self {
         let current = agents::current(app);
         let permission_agent =
@@ -1189,7 +1189,7 @@ fn header(chat: &mut AgentChat, view: &PanelView, ui: &mut egui::Ui, left: bool,
                 grip.union(l.rect)
             };
             let waiting = chat.waiting();
-            // Ready without SolidCraft's tools can't reach the design: say so, and how to fix it (#12283).
+            // Ready without GE STARR Design's tools can't reach the design: say so, and how to fix it (#12283).
             let without_design = waiting == 0 && chat.without_design();
             let s = if waiting > 0 {
                 tr("ui.agent_chat_waiting").to_string()
@@ -3156,7 +3156,7 @@ mod tests {
             }
             return;
         }
-        // Another snap's variables (SolidCraft started from a confined editor's terminal) are not the Snap.
+        // Another snap's variables (GE STARR Design started from a confined editor's terminal) are not the Snap.
         let cases: [(&str, &[(&str, &str)]); 4] = [
             ("flatpak", &[("FLATPAK_ID", "io.tangencylabs.solidcraft")]),
             ("snap", &[("SNAP", "/snap/solidcraft/12"), ("SNAP_NAME", "solidcraft")]),

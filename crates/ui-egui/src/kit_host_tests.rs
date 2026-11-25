@@ -1,7 +1,7 @@
-//! The kit's controls with SolidCraft's data: its shipped themes, icons, fonts, menus and panel
+//! The kit's controls with GE STARR Design's data: its shipped themes, icons, fonts, menus and panel
 //! host. The kit's own tests draw from plain data; these need the host.
 
-/// Primary and selected actions in SolidCraft's shipped themes.
+/// Primary and selected actions in GE STARR Design's shipped themes.
 mod actions {
     use crate::ui_kit::*;
     use solidcraft_ui_registry as registry;
@@ -111,7 +111,7 @@ mod actions {
     }
 }
 
-/// A checkbox with one of SolidCraft's icons, measured with its fonts.
+/// A checkbox with one of GE STARR Design's icons, measured with its fonts.
 mod checks {
     use crate::ui_kit::test_support::*;
     use crate::ui_kit::*;
@@ -168,7 +168,7 @@ mod checks {
     }
 }
 
-/// Fields with SolidCraft's data: its view-style menu, its themes and its expressions.
+/// Fields with GE STARR Design's data: its view-style menu, its themes and its expressions.
 mod fields {
     use crate::ui_kit::test_support::*;
     use crate::ui_kit::*;
@@ -507,7 +507,7 @@ mod fields {
     }
 }
 
-/// Layout in SolidCraft's shipped themes and its viewport's navigator axes.
+/// Layout in GE STARR Design's shipped themes and its viewport's navigator axes.
 mod layout {
     use crate::ui_kit::test_support::*;
     use crate::ui_kit::*;
@@ -607,7 +607,7 @@ mod layout {
     }
 
     /// Themes whose primary colour stands out from the selection keep it, Dark and Light
-    /// included; SolidCraft 95 and CGA, where it is the selection colour itself, take the ink for
+    /// included; GE STARR Design 95 and CGA, where it is the selection colour itself, take the ink for
     /// selected elements.
     #[test]
     fn only_themes_whose_primary_vanishes_switch_to_the_selected_ink() {
@@ -634,7 +634,7 @@ mod layout {
     }
 }
 
-/// Navigation slots in SolidCraft's shipped themes.
+/// Navigation slots in GE STARR Design's shipped themes.
 mod navigation {
     use crate::ui_kit::*;
 
@@ -656,7 +656,7 @@ mod navigation {
     }
 }
 
-/// Panels in SolidCraft's panel host and shipped themes.
+/// Panels in GE STARR Design's panel host and shipped themes.
 mod panel {
     use crate::ui_kit::test_support::*;
     use crate::ui_kit::*;
@@ -971,7 +971,7 @@ mod panel {
     }
 }
 
-/// The view compass with SolidCraft's catalogs.
+/// The view compass with GE STARR Design's catalogs.
 mod view_compass {
     use crate::ui_kit::view_compass::{Compass, ViewAxes, show, tips};
     use egui::{Event, Pos2, RawInput, Rect, pos2, vec2};

@@ -980,7 +980,7 @@ fn context_and_history_menus_only_use_kit_surfaces_without_allowances() {
     assert!(ALLOWED.is_empty());
 }
 
-/// SolidCraft's dialogs, Preferences and menus draw the kit's checkbox exactly as the kit does.
+/// GE STARR Design's dialogs, Preferences and menus draw the kit's checkbox exactly as the kit does.
 mod checkbox_in_use {
     use crate::ui_kit::{self, checkbox, test_checkbox_shapes as checkbox_shapes, test_raster as raster, test_textures_update as textures_update};
     use egui::{Rect, Shape, Ui, vec2};
@@ -1124,7 +1124,7 @@ mod checkbox_in_use {
     }
 }
 
-/// The kit's disclosures draw SolidCraft's chevron artwork (the host's icon set) at token size.
+/// The kit's disclosures draw GE STARR Design's chevron artwork (the host's icon set) at token size.
 mod disclosure_artwork {
     use crate::{icon_svg, scenario, ui_kit::*};
     use egui::{ColorImage, Pos2, Rect, vec2};
@@ -1375,7 +1375,7 @@ fn host_names_in(source: &str, names: &std::collections::BTreeSet<String>) -> Ve
     guard.found
 }
 
-/// SolidCraft's tab names and every command id in the engine's registry: what a shared crate
+/// GE STARR Design's tab names and every command id in the engine's registry: what a shared crate
 /// (the theme) and the kit and its components must take from the host as data.
 fn host_names() -> std::collections::BTreeSet<String> {
     let mut names: std::collections::BTreeSet<String> = crate::workspace::TAB_ACCENTS.names().map(str::to_owned).collect();
@@ -1447,7 +1447,7 @@ fn host_name_guard_finds_tab_names_and_command_ids_but_skips_tests() {
 /// navigation bar customiser's. Every other id in the host's catalogs names the host's screens.
 const KIT_MESSAGE_PREFIXES: &[&str] = &["color.", "navbar.custom.", "search.", "ui."];
 
-/// The message ids (`area.thing`) of SolidCraft's English catalog outside the kit's vocabulary:
+/// The message ids (`area.thing`) of GE STARR Design's English catalog outside the kit's vocabulary:
 /// labels the kit must take from the host as data.
 fn host_message_ids() -> std::collections::BTreeSet<String> {
     all_message_ids().into_iter().filter(|key| !KIT_MESSAGE_PREFIXES.iter().any(|prefix| key.starts_with(prefix))).collect()
@@ -1498,7 +1498,7 @@ fn message_id_guard_finds_host_ids_but_skips_kit_vocabulary_and_tests() {
     assert_eq!(host_names_in(source, &names), ["prefs.blur_off", "ai.prefs.pointer_preview_hidden"]);
 }
 
-/// English-label keys of SolidCraft's English catalog (`Bends`, `Collapse`): older tables read
+/// English-label keys of GE STARR Design's English catalog (`Bends`, `Collapse`): older tables read
 /// them through the label adapter. Everything else in the catalog is a message id.
 fn english_label_keys() -> std::collections::BTreeSet<String> {
     let english = crate::i18n::LOCALES.first().expect("the English catalog");
@@ -1506,7 +1506,7 @@ fn english_label_keys() -> std::collections::BTreeSet<String> {
     english.messages().keys().filter(|key| !ids.contains(*key)).map(|key| key.to_string()).collect()
 }
 
-/// Every dotted message id (`area.thing`) of SolidCraft's English catalog, the kit's included.
+/// Every dotted message id (`area.thing`) of GE STARR Design's English catalog, the kit's included.
 fn all_message_ids() -> std::collections::BTreeSet<String> {
     let english = crate::i18n::LOCALES.first().expect("the English catalog");
     english

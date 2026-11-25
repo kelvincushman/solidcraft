@@ -61,7 +61,7 @@ impl Kind {
             Kind::Anthropic => "anthropic",
         }
     }
-    /// Whether the agent is an endpoint SolidCraft talks to itself (either protocol).
+    /// Whether the agent is an endpoint GE STARR Design talks to itself (either protocol).
     pub fn is_api(self) -> bool {
         matches!(self, Kind::Api | Kind::Anthropic)
     }

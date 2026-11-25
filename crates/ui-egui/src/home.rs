@@ -157,7 +157,7 @@ fn cache_path(key: &str) -> Option<std::path::PathBuf> {
         .or_else(|| std::env::var_os("XDG_CACHE_HOME"))
         .map(std::path::PathBuf::from)
         .unwrap_or_else(std::env::temp_dir);
-    Some(root.join("SolidCraft").join("thumbnails").join(format!("{:016x}.png", h.finish())))
+    Some(root.join("GE STARR Design").join("thumbnails").join(format!("{:016x}.png", h.finish())))
 }
 
 #[cfg(not(target_arch = "wasm32"))]
@@ -733,7 +733,7 @@ pub fn show(app: &mut SolveApp, ui: &mut egui::Ui) {
     }
 }
 
-/// SolidCraft's rail: Start, New, Open, Recover; the design's own entries; the app's.
+/// GE STARR Design's rail: Start, New, Open, Recover; the design's own entries; the app's.
 fn rail(app: &SolveApp) -> Vec<start_page::RailItem<'_, FileAction>> {
     let busy = app.file_picker_busy();
     let design = !crate::documents::active_is_blank(app);
@@ -756,7 +756,7 @@ fn rail(app: &SolveApp) -> Vec<start_page::RailItem<'_, FileAction>> {
         ("home:settings", app.tr("home.settings").into(), format!("{primary},"), None, true, FileAction::Settings),
         ("home:shortcuts", app.tr("home.shortcuts").into(), String::new(), None, true, FileAction::Shortcuts),
         ("home:crashes", app.tr("home.crashes").into(), String::new(), None, true, FileAction::Crashes),
-        ("home:about", app.tr_label("About SolidCraft").into(), String::new(), None, true, FileAction::About),
+        ("home:about", app.tr_label("About GE STARR Design").into(), String::new(), None, true, FileAction::About),
     ];
     let mut rail = Vec::with_capacity(nav.len() + 2);
     for (index, (id, label, shortcut, section, enabled, chosen)) in nav.into_iter().enumerate() {

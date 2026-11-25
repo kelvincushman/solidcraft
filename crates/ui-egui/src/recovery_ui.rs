@@ -149,7 +149,7 @@ pub fn show(app: &mut SolveApp, ctx: &egui::Context) {
                 |ui| {
                     ui_kit::text(
                         ui,
-                        solidcraft_ui_text::tr_label("SolidCraft closed before these designs were saved. Their last autosave can be opened."),
+                        solidcraft_ui_text::tr_label("GE STARR Design closed before these designs were saved. Their last autosave can be opened."),
                         ui_kit::Text::Report("intro", false),
                     );
                     for (index, e) in app.recoverable.iter().take(20).enumerate() {

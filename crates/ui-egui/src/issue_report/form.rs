@@ -173,7 +173,7 @@ pub(super) fn show(app: &mut SolveApp, draft: &mut Draft, ctx: &egui::Context) -
                         ui_kit::text(ui, tr_label("Reports are public. A GitHub account is required."), ui_kit::Text::Note("public"));
                         ui_kit::text(
                             ui,
-                            tr_label("SolidCraft cannot submit reports directly. Submit on GitHub; no token is needed in the app."),
+                            tr_label("GE STARR Design cannot submit reports directly. Submit on GitHub; no token is needed in the app."),
                             ui_kit::Text::Note("submission"),
                         );
                         ui_kit::text(

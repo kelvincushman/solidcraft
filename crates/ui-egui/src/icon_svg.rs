@@ -1,4 +1,4 @@
-//! SolidCraft's icon set: the SVG masters in `assets/icons/ui/design/svg`, drawn by the kit's
+//! GE STARR Design's icon set: the SVG masters in `assets/icons/ui/design/svg`, drawn by the kit's
 //! renderer ([`crate::ui_kit::icons`]).
 //!
 //! The masters, `palette.toml` (every colour role in light and dark, and the accents) and
@@ -7,7 +7,7 @@
 //! (`tools/lint_icons.py`); a master never carries a colour of its own: it names a palette role.
 //! `palette.toml` owns defaults; theme files may override display roles and semantic ramps.
 //!
-//! The lookups here ([`resolve`], [`doc_for`], …) read SolidCraft's set whether or not it is
+//! The lookups here ([`resolve`], [`doc_for`], …) read GE STARR Design's set whether or not it is
 //! installed; `every_master_parses` holds that no master falls back to the placeholder.
 
 use crate::ui_kit::icons::{self, IconData, IconSet};
@@ -22,7 +22,7 @@ const _: () = assert!(
     "a theme file must be able to override every role and accent"
 );
 
-/// SolidCraft's icons.
+/// GE STARR Design's icons.
 pub static SET: IconSet = IconSet::new(IconData {
     role_names: ROLE_NAMES,
     role_source_hex: ROLE_SOURCE_HEX,
@@ -36,7 +36,7 @@ pub static SET: IconSet = IconSet::new(IconData {
     danger_accent: "constraint",
 });
 
-/// Make SolidCraft's icons and code-drawn glyphs ([`crate::icons::GLYPHS`]) the ones the kit draws:
+/// Make GE STARR Design's icons and code-drawn glyphs ([`crate::icons::GLYPHS`]) the ones the kit draws:
 /// at startup, before the first frame, and in every test context. Calling it again does nothing.
 pub fn install() {
     icons::install(&SET);
@@ -54,7 +54,7 @@ pub fn doc_for(master: &str, px: u32) -> Option<&'static Doc> {
     SET.doc_for(master, px)
 }
 
-/// [`IconSet::accent_index`] in SolidCraft's set.
+/// [`IconSet::accent_index`] in GE STARR Design's set.
 pub fn accent_index(name: &str) -> Option<usize> {
     SET.accent_index(name)
 }
@@ -64,7 +64,7 @@ pub fn primary(name: &str, dark: bool, vision: solidcraft_theme::ColorVision) ->
     SET.primary(name, dark, vision)
 }
 
-/// [`IconSet::role_colour`] in SolidCraft's set.
+/// [`IconSet::role_colour`] in GE STARR Design's set.
 pub fn role_colour(name: &str, look: Look) -> egui::Color32 {
     SET.role_colour(name, look)
 }

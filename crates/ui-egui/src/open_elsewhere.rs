@@ -1,6 +1,6 @@
 //! Two writers on one design (#5467): the desktop app keeps a lock file next to every design it
 //! has open (`solidcraft_engine::io::design_lock`), says so when a design it opens is open in
-//! another SolidCraft (on another computer, or in another window here), and asks before a Save
+//! another GE STARR Design (on another computer, or in another window here), and asks before a Save
 //! replaces a file that another program or computer changed since it was opened.
 //!
 //! Only interactive actions ask. A control-channel or script `doc.open` opens and reports
@@ -95,7 +95,7 @@ pub fn close(app: &mut SolveApp) {
     }
 }
 
-/// Before an interactive Open of a design: when another SolidCraft has it open, hold the request
+/// Before an interactive Open of a design: when another GE STARR Design has it open, hold the request
 /// and ask (`None`); otherwise hand it back to be opened. Insert Design only reads the file, so
 /// it never asks.
 #[cfg_attr(target_arch = "wasm32", allow(dead_code))]

@@ -1369,7 +1369,7 @@ mod tests {
     }
 }
 
-/// The kit's CJK font loader over SolidCraft's languages (the catalogs decide which are CJK).
+/// The kit's CJK font loader over GE STARR Design's languages (the catalogs decide which are CJK).
 #[cfg(test)]
 mod cjk_loader_tests {
     use crate::ui_kit::type_face::*;

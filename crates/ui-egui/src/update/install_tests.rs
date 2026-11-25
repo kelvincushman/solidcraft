@@ -5,10 +5,10 @@ use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
 /// A key pair made with `minisign -G -W` for these tests, and its signature of [`SIGNED_SUMS`]
-/// with the trusted comment "SolidCraft v9.9.9".
+/// with the trusted comment "GE STARR Design v9.9.9".
 const TEST_KEY: &str = "RWSnDqhIJ/zGKMSbsGUl4/prZLXqi3PwpEeY/D8gvdsEUeZRO9yWCoSM";
 const SIGNED_SUMS: &str = "aaaa  solidcraft-linux-x86_64.AppImage\n";
-const SIGNATURE: &str = "untrusted comment: signature from minisign secret key\nRUSnDqhIJ/zGKEyvbowsT8vEGvdv2OL9Rwv4bo2m7pJC54t2UQWXjU0+V7ayPB0Okk1teY53qZSTugz2Dnko35A3Xc1jdNFZCwU=\ntrusted comment: SolidCraft v9.9.9\npCRA0RNYxyt4SSqLbfI3p00xsCE4Rt8ixJWAQfoyb226cz/XdS7A2PRdG7hFmRmfg4h6zmtIt3iRLSKjk6RsAQ==\n";
+const SIGNATURE: &str = "untrusted comment: signature from minisign secret key\nRUSnDqhIJ/zGKEyvbowsT8vEGvdv2OL9Rwv4bo2m7pJC54t2UQWXjU0+V7ayPB0Okk1teY53qZSTugz2Dnko35A3Xc1jdNFZCwU=\ntrusted comment: GE STARR Design v9.9.9\npCRA0RNYxyt4SSqLbfI3p00xsCE4Rt8ixJWAQfoyb226cz/XdS7A2PRdG7hFmRmfg4h6zmtIt3iRLSKjk6RsAQ==\n";
 
 fn scratch(name: &str) -> PathBuf {
     let dir = std::env::temp_dir().join(format!("solidcraft-update-test-{}-{name}", std::process::id()));
@@ -73,7 +73,7 @@ const BASE: &str = "https://github.com/bherbruck/solidcraft/releases/download/v9
 fn release_with(assets: &[(&str, usize)]) -> Release {
     Release {
         tag: "v9.9.9".into(),
-        name: "SolidCraft v9.9.9".into(),
+        name: "GE STARR Design v9.9.9".into(),
         notes: String::new(),
         page: "https://github.com/bherbruck/solidcraft/releases/tag/v9.9.9".into(),
         assets: assets.iter().map(|(n, size)| Asset { name: n.to_string(), url: format!("{BASE}{n}"), size: *size as u64 }).collect(),
@@ -106,7 +106,7 @@ fn net(files: Vec<(String, Vec<u8>)>) -> Net {
 #[test]
 fn an_appimage_is_replaced_only_when_it_verifies() {
     let dir = scratch("appimage");
-    let target = dir.join("SolidCraft.AppImage");
+    let target = dir.join("GE STARR Design.AppImage");
     std::fs::write(&target, b"old version").unwrap();
     let new = b"new version".to_vec();
     let name = "solidcraft-linux-x86_64.AppImage";
@@ -120,7 +120,7 @@ fn an_appimage_is_replaced_only_when_it_verifies() {
     let err = run(&r, &kind, &m, "x86_64", &n, &dir.join("staging"), &Progress::default()).unwrap_err();
     assert!(err.contains("doesn't match"), "{err}");
     assert_eq!(std::fs::read(&target).unwrap(), b"old version");
-    assert!(!dir.join("SolidCraft.AppImage.update").exists(), "the bad download is deleted");
+    assert!(!dir.join("GE STARR Design.AppImage.update").exists(), "the bad download is deleted");
 
     // Not listed at all.
     let n = net(vec![(name.into(), new.clone()), (SUMS.into(), b"".to_vec())]);
@@ -237,13 +237,13 @@ fn installers_and_disk_images_are_handed_over() {
 #[test]
 fn windows_installer_is_followed_by_the_new_version() {
     let args = vec!["/i".to_string(), r"C:\Users\a b\Temp\solidcraft-update\x.msi".to_string(), "/passive".to_string()];
-    let (program, out) = relaunch_after(Path::new("msiexec"), &args, Path::new(r"C:\Program Files\SolidCraft\it's.exe"));
+    let (program, out) = relaunch_after(Path::new("msiexec"), &args, Path::new(r"C:\Program Files\GE STARR Design\it's.exe"));
     assert_eq!(program, PathBuf::from("powershell"));
     assert_eq!(
         out.last().unwrap(),
         &concat!(
             r#"Start-Process -FilePath 'msiexec' -ArgumentList '/i','"C:\Users\a b\Temp\solidcraft-update\x.msi"','/passive' -Wait; "#,
-            r"Start-Process -FilePath 'C:\Program Files\SolidCraft\it''s.exe'"
+            r"Start-Process -FilePath 'C:\Program Files\GE STARR Design\it''s.exe'"
         )
     );
     assert!(out.iter().any(|a| a == "-Command"));
@@ -254,7 +254,7 @@ fn an_updated_appimage_takes_the_release_file_name() {
     let new = |p: &str| release_named(Path::new(p), "v0.17.0", "x86_64");
     assert_eq!(new("/a/solidcraft-0.16.2-linux-x86_64.AppImage"), Path::new("/a/solidcraft-0.17.0-linux-x86_64.AppImage"));
     assert_eq!(new("/a/solvecraft-0.9.0-linux-x86_64.AppImage"), Path::new("/a/solidcraft-0.17.0-linux-x86_64.AppImage"));
-    assert_eq!(new("/a/SolidCraft.AppImage"), Path::new("/a/SolidCraft.AppImage"), "a name the user chose");
+    assert_eq!(new("/a/GE STARR Design.AppImage"), Path::new("/a/GE STARR Design.AppImage"), "a name the user chose");
     assert_eq!(new("/a/solidcraft-linux-x86_64.AppImage"), Path::new("/a/solidcraft-linux-x86_64.AppImage"), "no version in it");
     assert_eq!(new("/a/solidcraft-0.16.2-linux-x86_64.AppImage.bak"), Path::new("/a/solidcraft-0.16.2-linux-x86_64.AppImage.bak"));
 
@@ -280,7 +280,7 @@ fn an_updated_appimage_takes_the_release_file_name() {
 #[test]
 fn installation_refreshes_the_release_and_verifies_the_final_package() {
     let dir = scratch("refresh");
-    let target = dir.join("SolidCraft.AppImage");
+    let target = dir.join("GE STARR Design.AppImage");
     let name = "solidcraft-linux-x86_64.AppImage";
     let shown = release_with(&[(name, 3), (SUMS, 100)]);
     let base = "https://github.com/tangency-labs/solidcraft/releases/download/v10.0.0/";

@@ -135,7 +135,7 @@ fn analysis_colours_reach_the_shader_in_its_order() {
 
 // Icons no longer take their colours from the caller or from `IconColors`: the SVG masters name
 // palette roles (`assets/icons/ui/design/palette.toml`, light and dark, plus accents) that the
-// kit's renderer (`ui_kit::icons`) resolves in SolidCraft's set (`icon_svg::SET`). `icon_svg`'s
+// kit's renderer (`ui_kit::icons`) resolves in GE STARR Design's set (`icon_svg::SET`). `icon_svg`'s
 // own tests hold that every master parses and that only the palette's colours exist, including
 // its colour-vision variants.
 

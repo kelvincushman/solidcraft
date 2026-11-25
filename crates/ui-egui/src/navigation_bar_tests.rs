@@ -1,4 +1,4 @@
-//! SolidCraft's navigation slots on the kit's navigation bar: its catalogue, icons and commands,
+//! GE STARR Design's navigation slots on the kit's navigation bar: its catalogue, icons and commands,
 //! and bars measured in its viewport.
 use crate::navigation::NavCaps;
 use crate::navigation_bar::*;

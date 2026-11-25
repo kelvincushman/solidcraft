@@ -21,7 +21,7 @@ const MAX_BODY: usize = 24_000;
 // context.
 const MAX_REPORT: usize = 3 * 4 * MAX_ANSWER + MAX_BODY + 1000;
 const MAX_IMAGE_PIXELS: usize = 16_000_000;
-const ISSUE_URL: &str = "https://github.com/tangency-labs/solidcraft/issues/new";
+const ISSUE_URL: &str = "https://app.gestarr.co.uk/design/report";
 /// GitHub answers a longer link with `414 URI Too Long` (from about 8,200 characters).
 const MAX_URL: usize = 6000;
 /// Someone who isn't signed in is sent to sign in with the link to return to, encoded once more;
@@ -518,8 +518,8 @@ pub fn crash_draft(report: &serde_json::Value) -> Draft {
     let what = match kind {
         Some("command_panic") => "An internal error stopped a command (the design was left unchanged)",
         Some("kernel_panic_recovered") => "The geometry kernel hit an internal error (caught; the operation failed)",
-        Some("unclean_exit") => "An earlier SolidCraft session ended without recording a clean exit",
-        _ => "SolidCraft hit an internal error",
+        Some("unclean_exit") => "An earlier GE STARR Design session ended without recording a clean exit",
+        _ => "GE STARR Design hit an internal error",
     };
     let detection = if kind == Some("unclean_exit") {
         "\n\nDetected on a later launch; the exact exit time was not recorded. A system shutdown or forced stop can also cause an unclean exit."
@@ -561,7 +561,7 @@ pub fn crash_draft(report: &serde_json::Value) -> Draft {
         },
         s("id"),
         block(&format!(
-            "SolidCraft {} ({}, built {})\nOS: {} {}\n{}",
+            "GE STARR Design {} ({}, built {})\nOS: {} {}\n{}",
             field(app, "version"),
             field(app, "commit"),
             field(app, "built"),
@@ -1010,7 +1010,7 @@ mod tests {
         for label in [
             "Open GitHub issue form",
             "Copy report",
-            "SolidCraft cannot submit reports directly. Submit on GitHub; no token is needed in the app.",
+            "GE STARR Design cannot submit reports directly. Submit on GitHub; no token is needed in the app.",
             "If you are offline or GitHub does not open, use Copy report and keep the text to submit later.",
         ] {
             assert!(h.widget(label).is_some(), "missing submission action or explanation: {label}");
@@ -1330,7 +1330,7 @@ mod tests {
     #[test]
     fn crash_draft_marks_later_detection_without_losing_native_evidence() {
         let message =
-            "SolidCraft 0.3.2 (started 2026-10-01T10:00:00Z) crashed with ACCESS_VIOLATION (0xc0000005) in driver.dll+0x1234 between commands";
+            "GE STARR Design 0.3.2 (started 2026-10-01T10:00:00Z) crashed with ACCESS_VIOLATION (0xc0000005) in driver.dll+0x1234 between commands";
         let frame = "0xc0000005 ACCESS_VIOLATION at driver.dll+0x1234";
         let report = json!({
             "kind": "unclean_exit", "count": 2, "first_seen": "2026-10-12T16:23:41Z",

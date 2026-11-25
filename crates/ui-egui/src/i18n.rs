@@ -1,4 +1,4 @@
-//! SolidCraft's message catalogs and the adapters that read its own names and engine messages.
+//! GE STARR Design's message catalogs and the adapters that read its own names and engine messages.
 //! The message machinery (lookup, labels, substitution, the language choice) is the shared
 //! `solidcraft_ui_text` crate; [`install`] hands it these catalogs at startup.
 
@@ -83,7 +83,7 @@ pub const LOCALES: &[&Catalog] = &[
     &CHINESE_TRADITIONAL,
 ];
 
-/// Install SolidCraft's catalogs for every lookup, and how the kit's tree rows show labels: once,
+/// Install GE STARR Design's catalogs for every lookup, and how the kit's tree rows show labels: once,
 /// at startup, before the first message is read. Calling it again does nothing.
 pub fn install() {
     // This crate's own tests read English whatever the PC's language (#10297): the shared crate
@@ -100,7 +100,7 @@ fn row_name(label: &str, name: bool) -> String {
     if name { tr_name(label) } else { tr_dyn(label) }
 }
 
-/// The names SolidCraft gives and the engine messages it shows, translated with a [`Locale`].
+/// The names GE STARR Design gives and the engine messages it shows, translated with a [`Locale`].
 pub trait LocaleNames {
     /// A name someone gave (a body, sketch, component, …): shown as typed, even when it matches
     /// a UI label ("Fillet", "Boss"); only the default names are translated. A right-to-left name
@@ -115,7 +115,7 @@ pub trait LocaleNames {
     fn dynamic(self, text: &str) -> String;
 }
 
-/// The default names SolidCraft gives (`Untitled` for a new design, `Sketch1`, `Body2`,
+/// The default names GE STARR Design gives (`Untitled` for a new design, `Sketch1`, `Body2`,
 /// `Component3`), translated.
 fn default_name(locale: Locale, text: &str) -> Option<String> {
     if text == "Untitled" {
@@ -719,7 +719,7 @@ mod tests {
         let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("src");
         let mut files = Vec::new();
         source_files(&root, &mut files);
-        // The UI kit and its components, which SolidCraft mounts as `crate::ui_kit`.
+        // The UI kit and its components, which GE STARR Design mounts as `crate::ui_kit`.
         source_files(&crate::test_support::kit_src(), &mut files);
         files.sort();
         let sources: Vec<(std::path::PathBuf, String)> =
@@ -1525,7 +1525,7 @@ mod tests {
     fn module_path(path: &std::path::Path) -> Vec<String> {
         let mut parts: Vec<String> = path.components().filter_map(|part| part.as_os_str().to_str().map(str::to_string)).collect();
         let start = parts.iter().rposition(|part| part == "src").map_or(0, |at| at + 1);
-        // The kit crate's files sit under `crate::ui_kit`, where SolidCraft mounts the crate.
+        // The kit crate's files sit under `crate::ui_kit`, where GE STARR Design mounts the crate.
         let kit = start >= 2 && parts.get(start - 2).is_some_and(|dir| dir == "ui-kit");
         let mut relative: Vec<String> = parts.split_off(start);
         let file = relative.pop().unwrap_or_default();

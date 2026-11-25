@@ -1,4 +1,4 @@
-//! The SolidCraft egui front end.
+//! The GE STARR Design egui front end.
 //!
 //! A thin shell over [`solidcraft_engine::Session`]: panels read engine state and act through
 //! commands ([`SolveApp::run`]). Nothing here owns design data. The layout follows the familiar
@@ -774,7 +774,7 @@ pub struct SolveApp {
     pub msaa_compatibility: bool,
     /// Startup fallback diagnostic, also shown in Graphics preferences.
     pub graphics_fallback: Option<String>,
-    /// Settings put back at start because they kept SolidCraft from starting, one line each,
+    /// Settings put back at start because they kept GE STARR Design from starting, one line each,
     /// shown until dismissed (`prefs::show_reset_notice`).
     pub settings_reset: Vec<prefs::SettingReset>,
     /// The last command was a big operation: autosave after it.
@@ -819,7 +819,7 @@ pub struct SolveApp {
     pub agent: agent_cursor::AgentCursor,
     /// The agent chat panel (docs/design/in-app-agent-chat.md).
     pub agent_chat: agent_chat::AgentChat,
-    /// Making SolidCraft available to the AI apps installed here ([`ai_connect`]).
+    /// Making GE STARR Design available to the AI apps installed here ([`ai_connect`]).
     pub ai_connect: ai_connect::State,
     /// The window's screenshots in flight: control requests' and the issue report's.
     shots: solidcraft_control_egui::screenshot::Shots,
@@ -1103,14 +1103,14 @@ impl SolveApp {
                         installed.samples = 1;
                         self.msaa_compatibility = true;
                         eprintln!(
-                            "SolidCraft graphics: anti-aliasing check failed at {}x and passed at 1x; using 1x for this session",
+                            "GE STARR Design graphics: anti-aliasing check failed at {}x and passed at 1x; using 1x for this session",
                             scene.samples
                         );
                     }
                     Ok(solidcraft_viewport_gpu::view::MsaaCheck::FailedAtOne) => {
-                        eprintln!("SolidCraft graphics: anti-aliasing check also failed at 1x; keeping {}x", scene.samples);
+                        eprintln!("GE STARR Design graphics: anti-aliasing check also failed at 1x; keeping {}x", scene.samples);
                     }
-                    Err(error) => eprintln!("SolidCraft graphics: anti-aliasing check error; keeping {}x: {error}", scene.samples),
+                    Err(error) => eprintln!("GE STARR Design graphics: anti-aliasing check error; keeping {}x: {error}", scene.samples),
                 }
             }
         }
@@ -2807,7 +2807,7 @@ impl SolveApp {
         self.status_undo = false;
     }
 
-    /// Tell the user when the open design came from a newer SolidCraft: the notice on the status
+    /// Tell the user when the open design came from a newer GE STARR Design: the notice on the status
     /// line, and what this version couldn't read in the messages.
     pub(crate) fn say_newer_file(&mut self) {
         let Some(file) = self.session.doc.newer_file.clone() else { return };

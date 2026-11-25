@@ -2889,7 +2889,7 @@ pub fn finish_rename(app: &mut SolveApp, text: Option<&str>, commit: bool) -> bo
     true
 }
 
-/// How the workspace menu shows each of SolidCraft's workspaces ([`Target::Workspace`]).
+/// How the workspace menu shows each of GE STARR Design's workspaces ([`Target::Workspace`]).
 fn workspace_style(item: &Item) -> Option<crate::ui_kit::WorkspaceStyle> {
     use crate::ui_kit::WorkspaceStyle;
     use solidcraft_theme::AccentRamp;
@@ -2912,7 +2912,7 @@ fn workspace_style(item: &Item) -> Option<crate::ui_kit::WorkspaceStyle> {
     })
 }
 
-/// The kit's workspace menu over SolidCraft's workspaces (`items` of [`Target::Workspace`]).
+/// The kit's workspace menu over GE STARR Design's workspaces (`items` of [`Target::Workspace`]).
 pub(crate) fn workspace_menu(ui: &mut egui::Ui, items: &[Item], key_row: Option<usize>, height: f32) -> Option<Item> {
     let menu = crate::ui_kit::WorkspaceMenu { items, style: &workspace_style, footer: solidcraft_ui_text::tr("ui.workspace_footer") };
     crate::ui_kit::workspace_menu(ui, &menu, key_row, height)

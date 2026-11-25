@@ -142,7 +142,7 @@ pub fn navigation_fill(t: &Tokens, fill: NavigationFill) -> Option<egui::Color32
 }
 
 /// The label and icon colour of a slot. An active slot keeps the accent ink on its selected fill
-/// where that reads; a theme whose selected fill is as dark as its accent (SolidCraft 95's navy)
+/// where that reads; a theme whose selected fill is as dark as its accent (GE STARR Design 95's navy)
 /// gets the theme's selected-text ink instead, so an active toggle never turns into a blank block.
 pub fn navigation_ink(t: &Tokens, fill: NavigationFill) -> egui::Color32 {
     if fill != NavigationFill::Active {

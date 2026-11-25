@@ -1,4 +1,4 @@
-//! Search across a settings page the kit draws; the Preferences window is SolidCraft's use of it.
+//! Search across a settings page the kit draws; the Preferences window is GE STARR Design's use of it.
 //! The field is the Keyboard Shortcuts magnifier. A match is the control's own label, its
 //! section, its page, or the value a dropdown is showing, scored the same way as command search.
 //! English counts too, from the message catalog, so a new setting is found by being drawn —

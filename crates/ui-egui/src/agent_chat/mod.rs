@@ -1,9 +1,9 @@
 //! Agent chat: a side panel that talks to a coding agent the user already has (Claude Code,
 //! Codex, Antigravity, OpenCode, …) over the Agent Client Protocol, and gives that agent
-//! SolidCraft's MCP server, bridged to this window, as its way to read and change the open design
+//! GE STARR Design's MCP server, bridged to this window, as its way to read and change the open design
 //! (docs/agent-chat.md, docs/design/in-app-agent-chat.md).
 //!
-//! Desktop only: the agent is a child process. Off unless turned on in Preferences. SolidCraft
+//! Desktop only: the agent is a child process. Off unless turned on in Preferences. GE STARR Design
 //! never handles the agent's credentials: an agent that needs a login says so, and the panel
 //! shows the agent's own login command for the user to run.
 //!
@@ -286,7 +286,7 @@ pub enum Item {
         options: Vec<PermissionOption>,
         answer: Option<String>,
     },
-    /// A request of the agent's that SolidCraft holds for the user (files, replacing the design,
+    /// A request of the agent's that GE STARR Design holds for the user (files, replacing the design,
     /// or any change while the mode is "ask"); `tool`: what "Always allow" remembers.
     Approval {
         id: u64,
@@ -521,7 +521,7 @@ pub struct AgentChat {
     /// in. The next message tells it when the design is no longer that one (#10854).
     seen: Option<Revision>,
     tools_available: Option<bool>,
-    /// The agent was started with SolidCraft's tools (solidcraft-cli and the control port were
+    /// The agent was started with GE STARR Design's tools (solidcraft-cli and the control port were
     /// both there): if they are still unavailable, they failed to start, not to be found.
     tools_bridged: bool,
     /// The latest completed turn's notice; older notices remain in the transcript.
@@ -725,7 +725,7 @@ impl AgentChat {
     pub fn state(&self) -> State {
         self.state.unwrap_or(State::Off)
     }
-    /// The agent is ready but was started without SolidCraft's tools (no `solidcraft-cli` was
+    /// The agent is ready but was started without GE STARR Design's tools (no `solidcraft-cli` was
     /// found, or no control port), so no reply can read or change the design (#12283).
     pub(crate) fn without_design(&self) -> bool {
         self.state() == State::Ready && self.tools_available == Some(false)
@@ -1054,7 +1054,7 @@ pub(crate) enum AssistantMark {
     NeedsAuth,
     Stopped,
     Waiting(usize),
-    /// The agent runs, but without SolidCraft's tools: it can't read or change the design (#12283).
+    /// The agent runs, but without GE STARR Design's tools: it can't read or change the design (#12283).
     NoDesign,
 }
 
@@ -1126,7 +1126,7 @@ pub(crate) fn find_cli() -> Option<std::path::PathBuf> {
         .or_else(|| discover::find_in("solidcraft-cli", &discover::search_dirs()))
 }
 
-/// The agent's working folder: an empty folder of SolidCraft's own, so an agent's own file tools
+/// The agent's working folder: an empty folder of GE STARR Design's own, so an agent's own file tools
 /// (where it has them) see nothing of the user's.
 fn working_dir() -> std::path::PathBuf {
     let d = solidcraft_engine::recovery::data_dir()
@@ -2051,7 +2051,7 @@ pub fn answer_permission(app: &mut SolveApp, index: usize, option: Option<&str>)
 }
 
 /// The agent asks before running something of its own. The chat's own MCP tools are checked by
-/// SolidCraft's gate, so they're allowed here (no double question, see [`acp::is_bridge_tool`]);
+/// GE STARR Design's gate, so they're allowed here (no double question, see [`acp::is_bridge_tool`]);
 /// otherwise the mode or an earlier "always allow" may answer, and the chat says so; otherwise the
 /// user is asked.
 fn on_permission(app: &mut SolveApp, key: u64, title: String, kind: Option<&str>, options: Vec<PermissionOption>) {
@@ -2318,7 +2318,7 @@ pub fn poll(app: &mut SolveApp, ctx: &egui::Context) {
     }
     // AI features turned off: nothing keeps running, nothing is looked for.
     if !shown(app) {
-        // Turned back on later, AI features don't connect as if SolidCraft were starting.
+        // Turned back on later, AI features don't connect as if GE STARR Design were starting.
         app.agent_chat.connect_at_start = false;
         crate::documents::disconnect_background_chats(app, false);
         if app.agent_chat.backend.is_some() || app.agent_chat.open {

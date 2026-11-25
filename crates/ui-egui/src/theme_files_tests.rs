@@ -1,4 +1,4 @@
-//! SolidCraft's theme files through the kit's `theme_files`: its shipped themes, read against its
+//! GE STARR Design's theme files through the kit's `theme_files`: its shipped themes, read against its
 //! tab table and icon palette.
 use crate::test_support::{is_two_colour, tab_fixture};
 use crate::theme_files::fixtures::*;

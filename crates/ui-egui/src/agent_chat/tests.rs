@@ -70,7 +70,7 @@ fn transcript_paste_does_not_insert_a_previously_copied_body() {
         assert_eq!(h.app.session.undo.len(), undo);
         // A deliberate click outside the panel returns ownership to CAD.
         transcript_click(&mut h, egui::pos2(700.0, 500.0));
-        h.frame_with(vec![egui::Event::Paste("SolidCraft bodies".into())]);
+        h.frame_with(vec![egui::Event::Paste("GE STARR Design bodies".into())]);
         assert_eq!(h.app.session.model.state().bodies.len(), 2, "{layout:?}: CAD paste still works after returning to the model");
     }
 }
@@ -116,7 +116,7 @@ fn transcript_shortcut_ownership_ends_when_the_panel_is_hidden() {
             "minimized" => h.app.preferences.agent_chat_minimized = true,
             _ => h.app.preferences.ai_features = false,
         }
-        h.frame_with(vec![egui::Event::Paste("SolidCraft bodies".into())]);
+        h.frame_with(vec![egui::Event::Paste("GE STARR Design bodies".into())]);
         assert_eq!(h.app.session.model.state().bodies.len(), 2, "{hidden}: the invisible panel must not retain CAD keys");
     }
 }
@@ -652,7 +652,7 @@ fn permission_modes_decide_what_asks() {
     let _ = std::fs::remove_dir_all(&dir);
 }
 
-/// The agent's own questions: SolidCraft's tools are allowed (its gate checks them), an earlier
+/// The agent's own questions: GE STARR Design's tools are allowed (its gate checks them), an earlier
 /// "Always allow" answers by itself, and both leave a note; anything else is asked.
 #[test]
 fn the_agents_own_questions_are_answered_by_the_mode_or_asked() {
@@ -676,7 +676,7 @@ fn the_agents_own_questions_are_answered_by_the_mode_or_asked() {
     assert!(matches!(app.agent_chat.items.last(), Some(Item::Notice { .. })), "remembered");
 }
 
-/// A title that only mentions SolidCraft is no tool of SolidCraft's: in every mode but Allow
+/// A title that only mentions GE STARR Design is no tool of GE STARR Design's: in every mode but Allow
 /// everything the user is asked, and the mode still answers when it says to.
 #[test]
 fn a_title_that_mentions_solidcraft_goes_through_the_users_mode() {
@@ -3589,7 +3589,7 @@ fn an_attached_selection_goes_as_text_for_the_agent_and_as_chips_in_the_conversa
     app.agent_chat.attach_selection = true;
     send(&mut app, &ctx, "round this".into());
     let prompt = script.calls().pop().expect("a prompt");
-    assert!(prompt.starts_with("prompt: round this\n\n[Selected in SolidCraft"), "{prompt}");
+    assert!(prompt.starts_with("prompt: round this\n\n[Selected in GE STARR Design"), "{prompt}");
     for want in ["Elements:", "- Flat face ", "planar", "area ", "- Edge ", "length ", "name ", "Features:", "feature id", "Bodies:", "- Body1"] {
         assert!(prompt.contains(want), "{want:?} missing from {prompt}");
     }
@@ -3702,7 +3702,7 @@ fn assistant_marks_follow_chat_login_turns_and_approvals() {
     assert_eq!(assistant_mark_for(State::Ready, "signed_in", true, 0, false, true), Stopped);
 }
 
-/// #12283: an agent started without SolidCraft's tools (no solidcraft-cli beside the app) can't
+/// #12283: an agent started without GE STARR Design's tools (no solidcraft-cli beside the app) can't
 /// reach the design. The panel's badge and the application bar's mark say so, not Ready; the
 /// badge's hover text says how to get the tools.
 #[test]
@@ -4181,7 +4181,7 @@ fn picks_reach_the_agent_at_the_place_they_were_made() {
     let prompt = script.calls().pop().expect("a prompt");
     assert!(prompt.starts_with("prompt: make «1: Flat face"), "the face picked second stands first and is 1: {prompt}");
     assert!(prompt.contains(" match «2: Body1» \n\n[Selected"), "the body's mark follows 'match': {prompt}");
-    let block = &prompt[prompt.find("[Selected in SolidCraft").expect("the block")..];
+    let block = &prompt[prompt.find("[Selected in GE STARR Design").expect("the block")..];
     assert!(block.contains("stands for the numbered group below"), "{block}");
     let g1 = block.find("\n«1: ").expect("group 1");
     let g2 = block.find("\n«2: Body1»\nBodies:\n- Body1").expect("group 2");
@@ -4933,7 +4933,7 @@ fn tool_cards_show_file_names_never_paths() {
     assert_eq!(summary::plain_title("Read /tmp/claude-1000/scratch/out.txt"), "Read");
     assert_eq!(summary::plain_title("ui.render: /var/folders/xy/T/shot.png"), "ui.render");
     assert_eq!(summary::plain_title("Run mcp__x__y with a/b and /"), "Run mcp__x__y with a/b and /");
-    // SolidCraft's own file tools: the name alone; a temp file has none.
+    // GE STARR Design's own file tools: the name alone; a temp file has none.
     assert_eq!(
         said("export", json!({"path": "/home/me/cad/part.step"}), None).as_deref().map(|s| s.ends_with("part.step") && !s.contains('/')),
         Some(true)

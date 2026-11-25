@@ -1,5 +1,5 @@
 //! The Help menu (the ? button on the application bar): Documentation (the online book), About
-//! SolidCraft (version, commit, build date, licences, attributions, fonts), the keyboard shortcuts
+//! GE STARR Design (version, commit, build date, licences, attributions, fonts), the keyboard shortcuts
 //! (read only), Messages (every status message of the run, #2763), and Report an Issue, which
 //! opens a local editable report draft.
 
@@ -11,7 +11,7 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub const COMMIT: &str = env!("SOLIDCRAFT_COMMIT");
 pub const BUILD_DATE: &str = env!("SOLIDCRAFT_BUILD_DATE");
 /// The user and developer guide (docs/book, published by .github/workflows/pages.yml).
-pub const DOCS_URL: &str = "https://docs.solidcraft.io/";
+pub const DOCS_URL: &str = "https://app.gestarr.co.uk/design/help/";
 const ATTRIBUTION: &str = include_str!("../../../ATTRIBUTION.md");
 /// ATTRIBUTION.md as Markdown, parsed once: its tables run to a thousand rows (#7776).
 static ATTRIBUTION_BLOCKS: std::sync::LazyLock<Vec<crate::update::Block>> = std::sync::LazyLock::new(|| crate::update::parse_markdown(ATTRIBUTION));
@@ -32,7 +32,7 @@ pub fn diagnostics(app: &SolveApp) -> String {
     let renderer = if app.viewport.gpu.is_some() { "GPU" } else { "CPU" };
     let count = |n: usize, one: &str, many: &str| format!("{n} {}", if n == 1 { one } else { many });
     format!(
-        "SolidCraft {VERSION} ({COMMIT}, built {BUILD_DATE})\nOS: {} {}\nRenderer: {renderer}{}\nWindow: {}\nDesign: {} ({}, {})",
+        "GE STARR Design {VERSION} ({COMMIT}, built {BUILD_DATE})\nOS: {} {}\nRenderer: {renderer}{}\nWindow: {}\nDesign: {} ({}, {})",
         std::env::consts::OS,
         std::env::consts::ARCH,
         app.help.gpu.as_ref().map(|g| format!(", {g}")).unwrap_or_default(),
@@ -83,13 +83,13 @@ pub fn run(app: &mut SolveApp, ctx: &egui::Context, item: &str) {
     }
 }
 
-/// Add SolidCraft's MCP server to the AI assistants installed here (`solidcraft-cli mcp setup`),
+/// Add GE STARR Design's MCP server to the AI assistants installed here (`solidcraft-cli mcp setup`),
 /// with the `solidcraft-cli` beside this program. One line per client.
 #[cfg(not(target_arch = "wasm32"))]
 fn connect_assistants() -> Vec<String> {
     use solidcraft_engine::agent_setup as setup;
     let Some(cli) = crate::agent_chat::find_cli() else {
-        return vec!["solidcraft-cli was not found next to SolidCraft; run `solidcraft-cli mcp setup` from a terminal.".into()];
+        return vec!["solidcraft-cli was not found next to GE STARR Design; run `solidcraft-cli mcp setup` from a terminal.".into()];
     };
     let cli = cli.canonicalize().unwrap_or(cli).to_string_lossy().trim_start_matches(r"\\?\").to_owned();
     match setup::setup(&[], &setup::Env::from_process(), &cli) {
@@ -116,7 +116,7 @@ fn connect(app: &mut SolveApp, ctx: &egui::Context) {
                 ui_kit::text(
                     ui,
                     solidcraft_ui_text::tr_label(
-                        "Restart each assistant to load the SolidCraft server. Each file was backed up as .bak before it changed.",
+                        "Restart each assistant to load the GE STARR Design server. Each file was backed up as .bak before it changed.",
                     ),
                     ui_kit::Text::Note("connect_note"),
                 );
@@ -140,7 +140,7 @@ pub fn show(app: &mut SolveApp, ctx: &egui::Context, anchor: egui::Pos2) {
                 crate::ui_kit::menu::menu_frame(ui, |ui| {
                     for (id, label, icon) in [
                         ("docs", "Documentation", "library"),
-                        ("about", "About SolidCraft", "help"),
+                        ("about", "About GE STARR Design", "help"),
                         ("updates", solidcraft_ui_text::tr("update.check_for_updates"), "update"),
                         ("shortcuts", "Keyboard Shortcuts", "list"),
                         ("messages", "Messages…", "list"),
@@ -186,7 +186,7 @@ fn about(app: &mut SolveApp, ctx: &egui::Context) {
     if !app.help.about {
         return;
     }
-    let (closed, action) = ui_kit::Window::new(egui::Id::unique("sc_about"), "help", solidcraft_ui_text::tr_label("About SolidCraft"))
+    let (closed, action) = ui_kit::Window::new(egui::Id::unique("sc_about"), "help", solidcraft_ui_text::tr_label("About GE STARR Design"))
         .cards(2.0)
         .actions("", "Close", None)
         .show(ctx, true, |ui| {
@@ -197,7 +197,7 @@ fn about(app: &mut SolveApp, ctx: &egui::Context) {
             );
             ui_kit::text(
                 ui,
-                solidcraft_ui_text::tr_label("Open-source parametric 3D CAD in Rust. Licensed MIT OR Apache-2.0."),
+                solidcraft_ui_text::tr_label("GE STARR Engineering. Built on SolidCraft (github.com/tangency-labs/solidcraft), MIT OR Apache-2.0."),
                 ui_kit::Text::Note("description"),
             );
             let copy = ui_kit::button(ui, solidcraft_ui_text::tr_label("Copy diagnostic information"), ui_kit::Button::Normal);

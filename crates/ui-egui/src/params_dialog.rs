@@ -1160,7 +1160,7 @@ pub fn complete(ui: &mut egui::Ui, resp: &egui::Response, text: &mut String) -> 
     crate::expression_complete::complete(ui, resp, text) || crate::value_step::step(ui, resp, text)
 }
 
-/// SolidCraft's expression language for the kit's value fields: literals and units as
+/// GE STARR Design's expression language for the kit's value fields: literals and units as
 /// `doc::expr` reads them, completion and stepping by [`complete`].
 pub(crate) struct DocExpressions;
 
@@ -1190,7 +1190,7 @@ impl ui_kit::Expressions for DocExpressions {
     }
 }
 
-/// Give the kit's value fields in `ctx` SolidCraft's expressions, unless they have them already.
+/// Give the kit's value fields in `ctx` GE STARR Design's expressions, unless they have them already.
 /// The app calls this at the start of each frame entry point, so every context it draws into has them.
 pub(crate) fn install_expressions(ctx: &egui::Context) {
     if ui_kit::expressions(ctx).is_none() {

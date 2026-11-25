@@ -1,4 +1,4 @@
-//! SolidCraft's specimens of the kit: the elements drawn from SolidCraft's data (its menus
+//! GE STARR Design's specimens of the kit: the elements drawn from GE STARR Design's data (its menus
 //! from `context_menu`, the history strip and browser of a sample design, the continuity rows
 //! of its surface dialogs) and the boards that need a running app. The kit's own gallery,
 //! drawn from plain data, is `ui_kit::gallery`; these are checked with its `check_elements`.

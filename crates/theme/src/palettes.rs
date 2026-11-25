@@ -3,7 +3,7 @@ use crate::{IconColors, Tokens};
 use egui::Color32;
 use solidcraft_color::AnalysisColors;
 
-/// The primary (`active-3`) strokes, light then dark, that the tokens share with SolidCraft's icon artwork
+/// The primary (`active-3`) strokes, light then dark, that the tokens share with GE STARR Design's icon artwork
 /// (`assets/icons/ui/design/palette.toml`, including its colour vision variants). ui-egui's icon tests hold them equal.
 pub mod icon_strokes {
     pub const SKETCH_PRIMARY: [[u8; 3]; 2] = [[5, 127, 69], [18, 141, 69]];
@@ -123,7 +123,7 @@ impl Tokens {
             sketch_mode_tint: 0.12,
             sketch_footer_icon_size: 15.0,
             font_section_tracking: 0.04,
-            app_bar: Color32::from_rgb(52, 56, 64),
+            app_bar: Color32::from_rgb(46, 61, 79),
             app_bar_separator: Color32::from_rgb(136, 145, 160),
             toolbar: Color32::from_rgb(246, 247, 249),
             panel: Color32::from_rgb(250, 251, 252),
@@ -131,8 +131,8 @@ impl Tokens {
             border: Color32::from_rgb(208, 212, 220),
             text: Color32::from_rgb(38, 42, 50),
             text_dim: Color32::from_rgb(110, 116, 128),
-            accent: Color32::from_rgb(38, 120, 218),
-            accent_soft: Color32::from_rgb(214, 230, 250),
+            accent: Color32::from_rgb(46, 61, 79),
+            accent_soft: Color32::from_rgb(222, 229, 235),
             sketch_accent: icon_primary(strokes::SKETCH_PRIMARY[0]),
             // Icon palette active-3 ramps; these accents have no compiled constants yet.
             surface_accent: Color32::from_rgb(164, 80, 0),
@@ -237,7 +237,7 @@ impl Tokens {
             app_bar_hover_subtle: Color32::from_rgba_unmultiplied_const(255, 255, 255, 18),
             app_bar_hover_button: Color32::from_rgba_unmultiplied_const(255, 255, 255, 30),
             app_bar_hover_strong: Color32::from_rgba_unmultiplied_const(255, 255, 255, 40),
-            app_bar_tab_active: Color32::from_rgb(53, 59, 71),
+            app_bar_tab_active: Color32::from_rgb(74, 94, 114),
             dialog_body: Color32::from_rgb(255, 255, 255),
             dialog_footer: Color32::from_rgb(244, 246, 249),
             dialog_rule: Color32::from_rgb(230, 234, 240),
@@ -344,15 +344,15 @@ impl Tokens {
         t.file_recovery = Color32::from_rgb(67, 51, 28);
         t.file_recovery_ink = Color32::from_rgb(245, 204, 137);
         t.file_recovery_border = Color32::from_rgb(115, 88, 43);
-        t.app_bar = Color32::from_rgb(28, 31, 38);
+        t.app_bar = Color32::from_rgb(30, 41, 54);
         t.toolbar = Color32::from_rgb(39, 43, 52);
         t.panel = Color32::from_rgb(39, 43, 52);
         t.panel_header = Color32::from_rgb(47, 52, 62);
         t.border = Color32::from_rgb(63, 69, 82);
         t.text = Color32::from_rgb(222, 226, 232);
         t.text_dim = Color32::from_rgb(148, 155, 168);
-        t.accent = Color32::from_rgb(58, 136, 238);
-        t.accent_soft = Color32::from_rgb(42, 70, 110);
+        t.accent = Color32::from_rgb(86, 116, 146);
+        t.accent_soft = Color32::from_rgb(58, 74, 92);
         t.sketch_accent = icon_primary(strokes::SKETCH_PRIMARY[1]);
         t.surface_accent = Color32::from_rgb(149, 104, 45);
         t.mesh_accent = Color32::from_rgb(133, 113, 0);

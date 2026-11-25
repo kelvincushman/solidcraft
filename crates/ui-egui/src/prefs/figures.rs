@@ -1,4 +1,4 @@
-//! SolidCraft's own Preferences specimens: figures drawn from SolidCraft's content (a feature row,
+//! GE STARR Design's own Preferences specimens: figures drawn from GE STARR Design's content (a feature row,
 //! its status colours, what the colour vision modes recolour, the autosave interval, the agent
 //! pointer) with the kit's painters. Every colour and metric comes from tokens.
 use crate::ui_kit::{self, BackingTooltipExt as _, dimension};

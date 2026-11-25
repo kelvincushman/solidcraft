@@ -181,7 +181,7 @@ pub(crate) fn search_in_header(app: &SolveApp) -> bool {
     app.header.search == SearchPlace::Header && !app.embedded && !app.embed_editor
 }
 
-/// Where SolidCraft's application bar publishes its parts (scripts and scenarios use these names;
+/// Where GE STARR Design's application bar publishes its parts (scripts and scenarios use these names;
 /// `appbar:folder` and `tab:home` are kept for scripts written against the former folder button
 /// and Home tab).
 const APP_BAR_HANDLES: app_bar::Handles<'static> = app_bar::Handles {
@@ -230,7 +230,7 @@ pub fn app_bar(app: &mut SolveApp, ui: &mut egui::Ui) {
             // Narrow windows retain Save; Undo and Redo remain available from their shortcuts and menus.
             let bar = app_bar::AppBar {
                 mark: &|painter, at| crate::icons::glyphs::brand_mark(painter, at),
-                name: "SolidCraft",
+                name: "GE STARR Design",
                 home: app_bar::BarButton { id: "home", icon: "home", tip: app.tr("ui.start_page"), enabled: idle, narrow: false, wide_only: false },
                 file: app.tr("ui.file"),
                 file_open,
@@ -489,7 +489,7 @@ fn file_rows(app: &SolveApp) -> Vec<app_bar::FileRow> {
     rows.push(FileRow::Separator);
     rows.push(row("document.metadata", &format!("{}…", app.tr_label("Design Properties")), "", "settings", shown));
     rows.push(FileRow::Separator);
-    // The browser can install SolidCraft as an app (`install`): only while it offers to.
+    // The browser can install GE STARR Design as an app (`install`): only while it offers to.
     if crate::install::offered(app).is_some() {
         rows.push(button("install", solidcraft_ui_text::tr("install.menu"), "new", Some(solidcraft_ui_text::tr("install.button_tip"))));
     }
@@ -779,7 +779,7 @@ fn tab_aliases(tab: &str) -> &'static [&'static str] {
     }
 }
 
-/// Where SolidCraft's tab row publishes its parts (scripts and scenarios use these names).
+/// Where GE STARR Design's tab row publishes its parts (scripts and scenarios use these names).
 const TAB_HANDLES: ribbon::TabHandles<'static> =
     ribbon::TabHandles { tab: "tab:", tab_rect: "toolbar_tab:", add: "ribbon:add_tab", action: "ribbon:" };
 
@@ -984,7 +984,7 @@ fn open_ribbon(app: &mut SolveApp, ui: &mut egui::Ui, available: Rect, folded: R
     }
 }
 
-/// One ribbon button as SolidCraft sees it: the command pinned there, the one a click runs (a
+/// One ribbon button as GE STARR Design sees it: the command pinned there, the one a click runs (a
 /// family's chosen variant), and the component's data for it.
 struct PanelButton {
     pinned: &'static solidcraft_engine::CommandSpec,
@@ -1231,7 +1231,7 @@ impl RibbonPanels {
     }
 }
 
-/// Where SolidCraft's ribbon publishes its parts (scripts and scenarios use these names).
+/// Where GE STARR Design's ribbon publishes its parts (scripts and scenarios use these names).
 const RIBBON_HANDLES: ribbon::Handles<'static> = ribbon::Handles {
     button: &["toolbar:", "button:"],
     button_rect: "button:",
@@ -1760,7 +1760,7 @@ fn assistant_button(app: &mut SolveApp, ui: &mut egui::Ui, at: Rect) {
     }
 }
 
-/// SolidCraft's group menus: the search's accent, its pin tips and where rows publish.
+/// GE STARR Design's group menus: the search's accent, its pin tips and where rows publish.
 fn menu_style(app: &SolveApp) -> ribbon::MenuStyle<'static> {
     ribbon::MenuStyle {
         pin_tip: solidcraft_ui_text::tr_label("Pin to Toolbar"),
@@ -1906,7 +1906,7 @@ fn grid_entry<'a>(app: &SolveApp, c: &'static solidcraft_engine::CommandSpec, la
     }
 }
 
-/// SolidCraft's part of a grid icon: it drags onto the toolbar, and its tooltip or its deferred
+/// GE STARR Design's part of a grid icon: it drags onto the toolbar, and its tooltip or its deferred
 /// persistent paint.
 fn grid_cell_extras(
     app: &SolveApp,
@@ -3068,7 +3068,7 @@ mod header_report_tests {
         h.step(&json!({"click":{"handle":"appbar:help"}})).unwrap();
         assert!(h.app.help.menu);
         let version = solidcraft_ui_text::format("help.version", &[("version", crate::update::current_version())]);
-        assert!(h.widget("About SolidCraft").is_some());
+        assert!(h.widget("About GE STARR Design").is_some());
         assert!(h.widget(&version).is_none(), "the Help menu has no version row");
     }
 
@@ -3107,7 +3107,7 @@ mod header_report_tests {
         h.step(&json!({"click":{"handle":"appbar:help"}})).unwrap();
         assert!(h.app.help.menu);
         let version = solidcraft_ui_text::format("help.version", &[("version", crate::update::current_version())]);
-        let [_, about] = h.widget("About SolidCraft").unwrap();
+        let [_, about] = h.widget("About GE STARR Design").unwrap();
         let [_, row] = h.widget(&version).expect("the Help menu lists the version");
         let [_, shortcuts] = h.widget("Keyboard Shortcuts").unwrap();
         assert!(about < row && row < shortcuts, "between About and Keyboard Shortcuts");

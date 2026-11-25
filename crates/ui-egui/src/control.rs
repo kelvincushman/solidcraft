@@ -56,7 +56,7 @@ use solidcraft_viewport::{Camera, StandardView};
 use crate::SolveApp;
 
 // The request, its reply and the design watch are the shared control channel's
-// (`solidcraft_control`); SolidCraft's handlers below answer them.
+// (`solidcraft_control`); GE STARR Design's handlers below answer them.
 pub(crate) use solidcraft_control::{ControlRequest, ControlResponse, DOCUMENT_WATCH, DocumentWatch, cancelled_chat_response, chat_turn_cancelled};
 
 /// Publish the active design for subscribed connections ([`DocumentWatch`]). Called at the end of

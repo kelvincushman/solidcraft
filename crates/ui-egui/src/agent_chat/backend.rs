@@ -51,7 +51,7 @@ pub enum PromptPart {
 pub enum Event {
     /// Whether the agent takes documents (PDFs) in a message; sent before [`Event::Ready`].
     Documents(bool),
-    /// Whether SolidCraft tools were offered by the backend.
+    /// Whether GE STARR Design tools were offered by the backend.
     ToolsAvailable(bool),
     /// Ready for a message. `agent`: its name and version; `images`: it takes pictures.
     Ready {
@@ -122,7 +122,7 @@ pub enum Event {
 
 /// What a backend gets to start.
 pub struct StartContext {
-    /// Its working folder: an empty folder of SolidCraft's own, not the user's files.
+    /// Its working folder: an empty folder of GE STARR Design's own, not the user's files.
     pub cwd: std::path::PathBuf,
     /// The MCP server that reaches this window (`solidcraft-cli mcp --connect` to the chat's own
     /// endpoint), for backends that start MCP servers; `None` when it could not be set up.

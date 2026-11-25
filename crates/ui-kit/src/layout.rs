@@ -64,7 +64,7 @@ fn scope_inner<R>(ui: &mut Ui, grow: Option<egui::Id>, add: impl FnOnce(&mut Ui)
 
 /// The colour egui draws selected text, a selected button's label and a focused field's outline
 /// in, on a form: the form's primary colour, unless it all but vanishes on `selected_bg` (below
-/// 1.5:1), as in SolidCraft 95 and CGA where they are the same colour; then the theme's ink for
+/// 1.5:1), as in GE STARR Design 95 and CGA where they are the same colour; then the theme's ink for
 /// selected elements (#11804). Every other theme keeps its look. Tokens: `form_primary,
 /// selected_bg, selected_ink`.
 pub fn selection_ink(t: &Tokens) -> egui::Color32 {

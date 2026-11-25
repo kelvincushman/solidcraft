@@ -1,16 +1,31 @@
 {
-  "name": "SolidCraft",
-  "short_name": "SolidCraft",
-  "description": "Open-source parametric CAD built in Rust.",
+  "name": "GE STARR Design",
+  "short_name": "GS Design",
+  "description": "GE STARR Design: parts for GE STARR Engineering.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#e8ebf0",
-  "theme_color": "#343840",
-  "categories": ["productivity", "utilities"],
+  "background_color": "#FFFFFF",
+  "theme_color": "#2E3D4F",
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
   "icons": [
-    { "src": "icons/32x32/io.tangencylabs.solidcraft.png", "sizes": "32x32", "type": "image/png" },
-    { "src": "icons/256x256/io.tangencylabs.solidcraft.png", "sizes": "256x256", "type": "image/png" },
-    { "src": "icons/512x512/io.tangencylabs.solidcraft.png", "sizes": "512x512", "type": "image/png" }
+    {
+      "src": "icons/32x32/mark-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/256x256/mark-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/512x512/mark-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }

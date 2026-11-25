@@ -993,12 +993,12 @@ const BAR_HANDLES: history_bar::Handles<'static> =
 /// A feature as the bar draws it: id, name, icon, suppressed, type name, kind.
 type BarFeature = (u64, String, &'static str, bool, &'static str, TimelineKind);
 
-/// The History Play control's names: SolidCraft's commands that play and stop History.
+/// The History Play control's names: GE STARR Design's commands that play and stop History.
 pub(crate) fn play_labels() -> crate::ui_kit::PlayLabels<'static> {
     crate::ui_kit::PlayLabels { play: solidcraft_ui_text::tr("cmd.timeline_play"), stop: solidcraft_ui_text::tr("cmd.timeline_stop") }
 }
 
-/// The bar as SolidCraft describes it; the strip sets the marker's slot and the step count.
+/// The bar as GE STARR Design describes it; the strip sets the marker's slot and the step count.
 fn bar(app: &SolveApp, floating: bool) -> history_bar::Bar<'static> {
     let t = Tokens::get();
     history_bar::Bar {
@@ -1120,7 +1120,7 @@ fn click_feature(app: &mut SolveApp, order: &[u64], id: u64, modifiers: egui::Mo
     }
 }
 
-/// SolidCraft's entries of the bar: its features, and its folded runs, folders, joints and trays.
+/// GE STARR Design's entries of the bar: its features, and its folded runs, folders, joints and trays.
 struct BarSteps<'a> {
     app: &'a mut SolveApp,
     history: &'a crate::timeline_fold::History,

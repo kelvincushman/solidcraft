@@ -25,7 +25,7 @@ pub enum Plan {
     Skip,
 }
 
-/// Whether `target` is a CLI inside some SolidCraft app bundle (an older or moved bundle's link
+/// Whether `target` is a CLI inside some GE STARR Design app bundle (an older or moved bundle's link
 /// is ours to refresh).
 fn ours(target: &Path) -> bool {
     let s = target.to_string_lossy();
@@ -117,7 +117,7 @@ pub fn install_from_menu() -> (String, bool) {
         return (format!("solidcraft-cli is available as {}", l.display()), false);
     }
     let Some(script) = admin_script(&cli) else {
-        return ("The app's path has characters the installer cannot quote; move SolidCraft to /Applications.".into(), true);
+        return ("The app's path has characters the installer cannot quote; move GE STARR Design to /Applications.".into(), true);
     };
     match std::process::Command::new("osascript").args(["-e", &script]).output() {
         Ok(o) if o.status.success() => ("solidcraft-cli is available as /usr/local/bin/solidcraft-cli".into(), false),
@@ -143,7 +143,7 @@ pub fn admin_script(cli: &Path) -> Option<String> {
 mod tests {
     use super::*;
 
-    const CLI: &str = "/Applications/SolidCraft.app/Contents/MacOS/solidcraft-cli";
+    const CLI: &str = "/Applications/GE STARR Design.app/Contents/MacOS/solidcraft-cli";
 
     #[test]
     fn plans() {

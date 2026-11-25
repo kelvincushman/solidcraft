@@ -1,7 +1,7 @@
-//! Makes SolidCraft available to the AI apps on this computer without a step from the user: at
+//! Makes GE STARR Design available to the AI apps on this computer without a step from the user: at
 //! start-up, off the window thread, the `solidcraft` entry is added to each installed client
 //! (`solidcraft_engine::agent_setup`), and a status message names the clients that got it for the
-//! first time. The preference "Make SolidCraft available to AI apps on this computer" turns it
+//! first time. The preference "Make GE STARR Design available to AI apps on this computer" turns it
 //! off, which takes the entries out again. Best effort: nothing here can fail the launch.
 
 use crate::SolveApp;

@@ -1,6 +1,6 @@
-//! SolidCraft's icon artwork. Compiled only at L5.
+//! GE STARR Design's icon artwork. Compiled only at L5.
 //!
-//! Command, menu, browser and timeline icons are SolidCraft's SVG masters ([`crate::icon_svg::SET`]),
+//! Command, menu, browser and timeline icons are GE STARR Design's SVG masters ([`crate::icon_svg::SET`]),
 //! drawn by the kit's painters ([`crate::ui_kit::icons`], re-exported here): colours come from the
 //! default `palette.toml` roles/accents and optional active-theme overrides, never arbitrary caller
 //! tints. An icon with no master yet draws the placeholder.
@@ -18,7 +18,7 @@ pub(crate) mod navigation;
 #[path = "../../../assets/icons/ui/source/pointer.rs"]
 pub(crate) mod pointer;
 
-/// SolidCraft's code-drawn glyphs, as the kit draws them ([`crate::ui_kit::icons::glyphs`]).
+/// GE STARR Design's code-drawn glyphs, as the kit draws them ([`crate::ui_kit::icons::glyphs`]).
 pub static GLYPHS: crate::ui_kit::icons::glyphs::Glyphs = crate::ui_kit::icons::glyphs::Glyphs {
     transport: glyphs::transport_glyph,
     caption: glyphs::paint_glyph,

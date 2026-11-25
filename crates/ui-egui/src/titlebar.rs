@@ -1,4 +1,4 @@
-//! SolidCraft's window title bar: the shared window chrome ([`crate::window_chrome`]) with the
+//! GE STARR Design's window title bar: the shared window chrome ([`crate::window_chrome`]) with the
 //! app's own answers. Closing asks about unsaved designs first ([`window_action`]); on Windows and
 //! Linux without OS decorations ([`SolveApp::custom_titlebar`]) the application bar is the title
 //! bar, and on macOS it runs under the traffic lights ([`SolveApp::integrated_titlebar`]).
@@ -15,7 +15,7 @@ pub fn window_action(app: &mut SolveApp, ctx: &egui::Context, action: &str) -> R
     Ok(())
 }
 
-/// Runs a title-bar action as SolidCraft does.
+/// Runs a title-bar action as GE STARR Design does.
 pub(crate) fn run(app: &mut SolveApp, ctx: &egui::Context, action: WindowAction) {
     if action == WindowAction::Close {
         // Unsaved designs are asked about first; the window closes once they are answered.

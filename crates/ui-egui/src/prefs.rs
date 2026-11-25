@@ -682,7 +682,7 @@ fn same_orientation(a: Camera, b: Camera) -> bool {
 
 /// How the offer to stand a file up is made when its header names no program known to save Y up
 /// (Preferences: "For files from unknown programs", #7717). A file from SolidWorks is asked in the
-/// dialog (only the note when it already stands on Z, unless this is Ask); SolidCraft's own files
+/// dialog (only the note when it already stands on Z, unless this is Ask); GE STARR Design's own files
 /// are never offered.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -1498,7 +1498,7 @@ preference_settings! {
     /// Let AI agents connect: the localhost control channel (MCP) opens on the default port at
     /// start-up, unless `--control`/`SOLIDCRAFT_CONTROL_PORT` name one. Read at start-up.
     agent_control: bool = true, PAGE_ASSISTANT;
-    /// Add SolidCraft's MCP server to the AI apps installed on this computer at start-up
+    /// Add GE STARR Design's MCP server to the AI apps installed on this computer at start-up
     /// ([`crate::ai_connect`]); off takes the entries out again.
     connect_ai_apps: bool = true, PAGE_ASSISTANT;
     /// Agents the user added (the installed ones are found by themselves). API keys are never
@@ -1508,7 +1508,7 @@ preference_settings! {
     agent_default: String = String::new();
     /// The agent the chat last started (an agent's id; empty: none yet).
     agent_last: String = String::new();
-    /// When SolidCraft starts: connect the agent started last (`agent_last`, else the one a new
+    /// When GE STARR Design starts: connect the agent started last (`agent_last`, else the one a new
     /// conversation starts with), and open the panel (#7009). Off by default: an agent starts
     /// only when a message is sent or Connect is pressed, and the panel opens when asked for.
     agent_connect_at_start: bool = false, PAGE_ASSISTANT;
@@ -2683,7 +2683,7 @@ pub fn check_msaa(app: &mut SolveApp, requested: u32) {
     app.settings_reset.push(SettingReset::Msaa { requested, reset, supported });
 }
 
-/// A setting put back at start because it would keep SolidCraft from starting.
+/// A setting put back at start because it would keep GE STARR Design from starting.
 #[derive(Clone, Debug, PartialEq)]
 pub enum SettingReset {
     /// Anti-aliasing samples the graphics device can't render with.
@@ -3692,7 +3692,7 @@ fn theme_option_text(text: &crate::theme_files::OptionText, language: &str, fall
     text.get(language).or_else(|| text.get("en")).map(String::as_str).unwrap_or(fallback).to_owned()
 }
 
-/// SolidCraft's name and help (message ids) for the theme system's standard option `id`.
+/// GE STARR Design's name and help (message ids) for the theme system's standard option `id`.
 fn standard_option_text(id: &str) -> Option<(&'static str, &'static str)> {
     match id {
         "blur" => Some(("prefs.theme_option_blur", "prefs.theme_option_blur_help")),
@@ -3745,7 +3745,7 @@ fn theme_option_rows<'a>(
         .collect()
 }
 
-/// What the theme options list says, from SolidCraft's catalogs.
+/// What the theme options list says, from GE STARR Design's catalogs.
 fn theme_options_text() -> ui_kit::ThemeOptionsText<'static> {
     ui_kit::ThemeOptionsText {
         count: |count| {
@@ -11354,11 +11354,11 @@ mod tests {
 
         let mut app = SolveApp::new(solidcraft_engine::Session::default(), Default::default());
         app.open_path(&path);
-        assert!(app.stand_up.is_none(), "SolidCraft's own exports already have Z up");
+        assert!(app.stand_up.is_none(), "GE STARR Design's own exports already have Z up");
         // Another originating system is offered (asked in the dialog, without looking at how the
         // flat box rests).
         let text = std::fs::read_to_string(&path).unwrap();
-        std::fs::write(&path, text.replace("'SolidCraft','SolidCraft'", "'SolidCraft','Example CAD'")).unwrap();
+        std::fs::write(&path, text.replace("'GE STARR Design','GE STARR Design'", "'GE STARR Design','Example CAD'")).unwrap();
         app.preferences.stand_up_unknown = StandUpUnknown::Ask;
         app.open_path(&path);
         let offered = app.stand_up.clone().unwrap_or_default();
@@ -12219,7 +12219,7 @@ mod perspective_fov_tests {
     }
 }
 
-// SolidCraft's Preferences window drives the kit's settings search; these run the whole app.
+// GE STARR Design's Preferences window drives the kit's settings search; these run the whole app.
 #[cfg(test)]
 mod settings_search_tests {
     use crate::ui_kit::settings_search::*;
@@ -13081,7 +13081,7 @@ mod settings_search_tests {
     }
 }
 
-// SolidCraft's Preferences window on the kit's window, footer and colour components.
+// GE STARR Design's Preferences window on the kit's window, footer and colour components.
 #[cfg(test)]
 mod kit_use_tests {
     use crate::scenario;

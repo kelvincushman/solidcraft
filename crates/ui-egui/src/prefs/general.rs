@@ -42,7 +42,7 @@ pub(super) fn show(app: &mut SolveApp, ui: &mut egui::Ui) {
             });
         });
         ui_kit::settings_section(ui, "saving", app.tr("prefs.saving"), |ui| {
-            ui_kit::checkbox(ui, app.tr("Reopen the designs that were open when SolidCraft was last closed"), &mut app.preferences.reopen_designs);
+            ui_kit::checkbox(ui, app.tr("Reopen the designs that were open when GE STARR Design was last closed"), &mut app.preferences.reopen_designs);
             // Only the web app keeps designs in the browser (#10220).
             if app.services.browser_files.is_some() {
                 let tip = app.tr("prefs.keep_unsaved_in_browser_tip").to_string();
