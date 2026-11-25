@@ -4723,6 +4723,7 @@ dependencies = [
 name = "solidcraft-web"
 version = "0.40.0-rc.3"
 dependencies = [
+ "base64",
  "eframe",
  "egui",
  "js-sys",

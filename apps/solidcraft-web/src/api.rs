@@ -52,7 +52,16 @@ impl Api {
             (
                 "request",
                 Closure::<dyn Fn(String, JsValue) -> js_sys::Promise>::new(move |method: String, value: JsValue| {
-                    request.request(&method, params(&value))
+                    // Answered here, not on the control channel: their base64 may pass its 16 MiB.
+                    let host = match method.as_str() {
+                        "host.write_file" => crate::host::write_file(&value),
+                        "host.read_file" => crate::host::read_file(&value),
+                        _ => return request.request(&method, params(&value)),
+                    };
+                    match host {
+                        Ok(result) => js_sys::Promise::resolve(&result),
+                        Err(message) => js_sys::Promise::reject(&error(&message)),
+                    }
                 })
                 .into_js_value(),
             ),

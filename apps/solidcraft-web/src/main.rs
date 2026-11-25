@@ -17,6 +17,8 @@ mod disk;
 mod easyprint;
 #[cfg(target_arch = "wasm32")]
 mod files;
+#[cfg(any(target_arch = "wasm32", test))]
+mod host;
 #[cfg(target_arch = "wasm32")]
 mod install;
 #[cfg(any(target_arch = "wasm32", test))]

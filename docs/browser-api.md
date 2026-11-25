@@ -56,6 +56,25 @@ await app.request("document.import", {text: kept.text, name: "Bracket"});
 The 16 MiB limit on parameters applies to `document.import`'s `text`. A design that links other
 design files keeps those links as paths; the files themselves are not in `text`.
 
+### Files from and for the host page
+
+Insert and export commands take paths on the browser's virtual file system. A host page puts a
+file there, and takes one back, with two more methods, answered in the page itself (so their
+base64 may be larger than the 16 MiB parameter limit):
+
+```js
+await app.request("host.write_file", {path: "/host/part.step", base64}); // {path, bytes}
+await app.execute("file.insert_step", {path: "/host/part.step"});         // STEP or IGES (.igs)
+await app.execute("file.export_step", {path: "/host/out.step"});
+const {bytes, base64: out} = await app.request("host.read_file", {path: "/host/out.step"});
+```
+
+The path must be `/host/` and one plain file name of at most 120 characters (no `/`, `\`, `..`
+or control characters); a file is at most 64 MiB decoded. Anything else rejects with an
+`Error` naming the problem. `file.insert_mesh`, `sketch.insert_dxf`, `sketch.insert_svg` and the
+other export commands read and write `/host/` paths the same way. Files under `/host/` stay in
+memory for the session and are never downloaded or kept in the browser.
+
 ## Verify a browser build
 
 Build the app with `trunk build` in `apps/solidcraft-web`, then run from the repository root:
